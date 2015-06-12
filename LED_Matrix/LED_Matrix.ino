@@ -20,8 +20,8 @@ uint8_t leds = 12;
 //   NEO_KHZ400  400 KHz (classic 'v1' (not v2) FLORA pixels, WS2811 drivers)
 //   NEO_GRB     Pixels are wired for GRB bitstream (most NeoPixel products)
 //   NEO_RGB     Pixels are wired for RGB bitstream (v1 FLORA pixels, not v2)
-Adafruit_NeoPixel strip = Adafruit_NeoPixel(leds, pin, NEO_GRB + NEO_KHZ800);
-MyLedMatrix matrix = MyLedMatrix(height, width);
+//Adafruit_NeoPixel strip = Adafruit_NeoPixel(leds, pin, NEO_GRB + NEO_KHZ800);
+MyLedMatrix matrix = MyLedMatrix(height, width, leds, pin, NEO_GRB + NEO_KHZ800);
 
 void setup()
 {
@@ -31,9 +31,8 @@ void setup()
 	 #endif
 	 // End of trinket special code
 
-
-	 strip.begin();
-	 strip.show(); // Initialize all pixels to 'off'
+	 matrix.begin();
+	 matrix.show(); // Initialize all pixels to 'off'
 }
 
 void loop()

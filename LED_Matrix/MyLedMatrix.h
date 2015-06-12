@@ -14,11 +14,18 @@
 class MyLedMatrix : public Adafruit_NeoPixel
 {
 public:
-	MyLedMatrix(uint8_t h, uint8_t w);
+	MyLedMatrix(uint8_t h, uint8_t w, uint8_t l, uint8_t p, uint8_t t=NEO_GRB + NEO_KHZ800);
 
 	void Begin();
 	void FillScreen(uint8_t r, uint8_t g, uint8_t b);
-	void ClearMatrix();
+	void ClearScreen();
+	
+	void SetText();
+	void MoveRight();
+	void MoveLeft();
+	void MoveUp();
+	void MoveDown();
+	
 	
 	
 private:

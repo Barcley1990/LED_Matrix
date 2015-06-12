@@ -9,7 +9,7 @@
 #include "MyLedMatrix.h"
 // inherits from Adafruit_NeoPixel
 // default constructor
-MyLedMatrix::MyLedMatrix(uint8_t h, uint8_t w) : Adafruit_NeoPixel(120, 4, NEO_GRB + NEO_KHZ800)
+MyLedMatrix::MyLedMatrix(uint8_t h, uint8_t w, uint8_t l, uint8_t p, uint8_t t) : Adafruit_NeoPixel(l, p, t)
 {
 	m_height = h;
 	m_width = w;
@@ -18,16 +18,16 @@ MyLedMatrix::MyLedMatrix(uint8_t h, uint8_t w) : Adafruit_NeoPixel(120, 4, NEO_G
 
 void MyLedMatrix::FillScreen(uint8_t r, uint8_t g, uint8_t b)
 {
-	for (int i=0; i<5; i++)
+	for (int i=0; i<m_maxleds; i++)
 	{
 		Adafruit_NeoPixel::setPixelColor(i,r,g,b);
 		Adafruit_NeoPixel::show();
 	}
 }
 
-void MyLedMatrix::ClearMatrix()
+void MyLedMatrix::ClearScreen()
 {
-	for (int i=0; i<5; i++)
+	for (int i=0; i<m_maxleds; i++)
 	{
 		Adafruit_NeoPixel::setPixelColor(i,0,0,0);
 	}

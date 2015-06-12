@@ -29,15 +29,15 @@
     <preserveEEPROM>true</preserveEEPROM>
     <AsfFrameworkConfig>
       <framework-data xmlns="">
-  <options />
-  <configurations />
-  <files />
-  <documentation help="" />
-  <offline-documentation help="" />
-  <dependencies>
-    <content-extension eid="atmel.asf" uuidref="Atmel.ASF" version="3.22.0" />
-  </dependencies>
-</framework-data>
+        <options />
+        <configurations />
+        <files />
+        <documentation help="" />
+        <offline-documentation help="" />
+        <dependencies>
+          <content-extension eid="atmel.asf" uuidref="Atmel.ASF" version="3.22.0" />
+        </dependencies>
+      </framework-data>
     </AsfFrameworkConfig>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
@@ -216,10 +216,10 @@
     <Compile Include="LED_Matrix.ino">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="Matrix.cpp">
+    <Compile Include="MyLedMatrix.cpp">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="Matrix.h">
+    <Compile Include="MyLedMatrix.h">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="Visual Micro\.LED_Matrix.vsarduino.h">
