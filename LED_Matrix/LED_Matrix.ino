@@ -4,14 +4,19 @@
  * Created: 6/12/2015 11:12:24 AM
  * Author: Tobias Nuss
  */ 
+#define led11 0x00
+#define led12 0x17
 
 #include "Adafruit_NeoPixel.h"
 #include "MyLedMatrix.h"
+#include <math.h> 
+
+#define BRIGHTNESS 64
 
 uint8_t height = 10;
 uint8_t width = 12;
-uint8_t pin = 4;
-uint8_t leds = 12;
+uint8_t pin = 5;
+uint8_t leds = 120;
 
 // Parameter 1 = number of pixels in strip
 // Parameter 2 = Arduino pin number (most are valid)
@@ -33,9 +38,16 @@ void setup()
 
 	 matrix.begin();
 	 matrix.show(); // Initialize all pixels to 'off'
+
+      //matrix.SetChar('H', 255, 0 ,0, 0, 0);
+      matrix.SetText("Hello World", 255, 0, 0);
+      matrix.show();
+ 
 }
 
 void loop()
 {
+
+  
 }
 	

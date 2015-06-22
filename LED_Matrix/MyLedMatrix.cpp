@@ -58,10 +58,10 @@ uint16_t MyLedMatrix::SetXY(uint8_t x, uint8_t y)
 
 void MyLedMatrix::SetText(char *text, uint8_t r, uint8_t g, uint8_t b)
 {
-     for(uint8_t i=0; i<strlen(text); i++)
+     for(uint8_t i=0; i<(strlen(text)*5); i++)
      {
-       char *ch = &text[i];
-       SetChar(*ch, r ,g ,b, m_width-i, 0);
+       //char *ch = &text[i];
+       SetChar(text[i], r ,g ,b, m_width-i, 0);
        delay(100);
      }   
 }
