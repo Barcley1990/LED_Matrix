@@ -32,6 +32,7 @@ public:
 	void MoveUp();
 	void MoveDown();
 	uint16_t SetXY(uint8_t x, uint8_t y);
+	uint8_t GetXY(uint16_t n, uint8_t &X, uint8_t &Y);
 
 	
 	

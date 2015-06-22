@@ -923,6 +923,24 @@ void Adafruit_NeoPixel::setPixelColor( uint16_t n, uint8_t r, uint8_t g, uint8_t
   }
 }
 
+void Adafruit_NeoPixel::resetPixel( uint16_t n )
+{
+	if (n<numLEDs)
+	{
+/*		if (brightness)
+		{
+			r = (0 * brightness) >> 8;
+			g = (0 * brightness) >> 8;
+			b = (0 * brightness) >> 8;
+		}*/
+	uint8_t *p = &pixels[n * 3];
+	p[rOffset] = 0;
+	p[gOffset] = 0;
+	p[bOffset] = 0;
+	}
+	
+}
+
 
 // Set pixel color from 'packed' 32-bit RGB color:
 void Adafruit_NeoPixel::setPixelColor(uint16_t n, uint32_t c) {

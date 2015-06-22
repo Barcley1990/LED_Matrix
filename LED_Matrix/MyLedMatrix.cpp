@@ -39,8 +39,8 @@ uint16_t MyLedMatrix::SetXY(uint8_t x, uint8_t y)
 {
   uint16_t i;
   
-     if( y & 0x01) 
-     {
+    if( y & 0x01)
+    {
       // Odd rows run backwards
       uint8_t reverseX = (m_width - 1) - x;
       i = (y * m_width) + reverseX;
@@ -54,6 +54,22 @@ uint16_t MyLedMatrix::SetXY(uint8_t x, uint8_t y)
     return i;    
 }
 
+// ???? Brainf**k ????
+uint8_t MyLedMatrix::GetXY(uint16_t n, uint8_t &X, uint8_t &Y)
+{
+	if(1 )
+	{
+		// Odd rows run backwards
+		X = abs((n % m_width)-(m_width-1));
+		Y = abs((n % m_height)-(m_height-1));
+	}	
+	else
+	{
+		// Even rows run forwards
+		X = n % m_width;
+		Y = n % m_height;
+	}
+}
 
 
 void MyLedMatrix::SetText(char *text, uint8_t r, uint8_t g, uint8_t b)
@@ -86,8 +102,20 @@ void MyLedMatrix::SetChar(char ch, uint8_t r, uint8_t g, uint8_t b, uint8_t offs
 
 void MyLedMatrix::MoveRight(uint8_t steps)
 {
-	//uint8_t pixels = Adafruit_NeoPixel::getPixels();
+	uint8_t *pixels = Adafruit_NeoPixel::getPixels();	
+	uint8_t *X, *Y;
+	uint16_t position;
 	
+	for (uint8_t i=0; i<m_maxleds; i++)
+	{		
+		position = *pixels;
+		uint8_t color = Adafruit_NeoPixel::getPixelColor(position);
+		Adafruit_NeoPixel::resetPixel(position);
+		GetXY(position, &X, &Y);
+		//Adafruit_NeoPixel::setPixelColor(SetXY(*X, *Y), color); 
+		pixels++;
+	}	
+	Adafruit_NeoPixel::show();
 }
 
 
