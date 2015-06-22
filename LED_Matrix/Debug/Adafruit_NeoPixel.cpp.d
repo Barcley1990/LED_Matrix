@@ -1,6 +1,6 @@
-C:\Users\tobnu\AppData\Local\V.Micro\Arduino\Builds\LED_Matrix\micro\Adafruit_NeoPixel.cpp.o: \
- C:\Users\tobnu\AppData\Local\V.Micro\Arduino\Builds\LED_Matrix\micro\Adafruit_NeoPixel.cpp \
- C:\Users\tobnu\AppData\Local\V.Micro\Arduino\Builds\LED_Matrix\micro\Adafruit_NeoPixel.h \
+C:\Users\tobnu\AppData\Local\V.Micro\Arduino\Builds\LED_Matrix\mega_atmega2560\Adafruit_NeoPixel.cpp.o: \
+ C:\Users\tobnu\AppData\Local\V.Micro\Arduino\Builds\LED_Matrix\mega_atmega2560\Adafruit_NeoPixel.cpp \
+ C:\Users\tobnu\AppData\Local\V.Micro\Arduino\Builds\LED_Matrix\mega_atmega2560\Adafruit_NeoPixel.h \
  C:\Program\ Files\ (x86)\Arduino\hardware\arduino\avr\cores\arduino/Arduino.h \
  C:\Program\ Files\ (x86)\Arduino\hardware\arduino\avr\cores\arduino/binary.h \
  C:\Program\ Files\ (x86)\Arduino\hardware\arduino\avr\cores\arduino/WCharacter.h \
@@ -11,7 +11,4 @@ C:\Users\tobnu\AppData\Local\V.Micro\Arduino\Builds\LED_Matrix\micro\Adafruit_Ne
  C:\Program\ Files\ (x86)\Arduino\hardware\arduino\avr\cores\arduino/Printable.h \
  C:\Program\ Files\ (x86)\Arduino\hardware\arduino\avr\cores\arduino/USBAPI.h \
  C:\Program\ Files\ (x86)\Arduino\hardware\arduino\avr\cores\arduino/Arduino.h \
- C:\Program\ Files\ (x86)\Arduino\hardware\arduino\avr\cores\arduino/USBDesc.h \
- C:\Program\ Files\ (x86)\Arduino\hardware\arduino\avr\cores\arduino/USBCore.h \
- C:\Program\ Files\ (x86)\Arduino\hardware\arduino\avr\variants\micro/pins_arduino.h \
- C:\Program\ Files\ (x86)\Arduino\hardware\arduino\avr\variants\micro/../leonardo/pins_arduino.h
+ C:\Program\ Files\ (x86)\Arduino\hardware\arduino\avr\variants\mega/pins_arduino.h

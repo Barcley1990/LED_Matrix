@@ -1,8 +1,8 @@
-C:\Users\tobnu\AppData\Local\V.Micro\Arduino\Builds\LED_Matrix\micro\FastLED.cpp.o: \
- C:\Users\tobnu\AppData\Local\V.Micro\Arduino\Builds\LED_Matrix\micro\FastLED.cpp \
- C:\Users\tobnu\AppData\Local\V.Micro\Arduino\Builds\LED_Matrix\micro\FastLED.h \
- C:\Users\tobnu\AppData\Local\V.Micro\Arduino\Builds\LED_Matrix\micro\controller.h \
- C:\Users\tobnu\AppData\Local\V.Micro\Arduino\Builds\LED_Matrix\micro\led_sysdefs.h \
+C:\Users\tobnu\AppData\Local\V.Micro\Arduino\Builds\LED_Matrix\mega_atmega2560\FastLED.cpp.o: \
+ C:\Users\tobnu\AppData\Local\V.Micro\Arduino\Builds\LED_Matrix\mega_atmega2560\FastLED.cpp \
+ C:\Users\tobnu\AppData\Local\V.Micro\Arduino\Builds\LED_Matrix\mega_atmega2560\FastLED.h \
+ C:\Users\tobnu\AppData\Local\V.Micro\Arduino\Builds\LED_Matrix\mega_atmega2560\controller.h \
+ C:\Users\tobnu\AppData\Local\V.Micro\Arduino\Builds\LED_Matrix\mega_atmega2560\led_sysdefs.h \
  C:\Program\ Files\ (x86)\Arduino\hardware\arduino\avr\cores\arduino/Arduino.h \
  C:\Program\ Files\ (x86)\Arduino\hardware\arduino\avr\cores\arduino/binary.h \
  C:\Program\ Files\ (x86)\Arduino\hardware\arduino\avr\cores\arduino/WCharacter.h \
@@ -13,35 +13,32 @@ C:\Users\tobnu\AppData\Local\V.Micro\Arduino\Builds\LED_Matrix\micro\FastLED.cpp
  C:\Program\ Files\ (x86)\Arduino\hardware\arduino\avr\cores\arduino/Printable.h \
  C:\Program\ Files\ (x86)\Arduino\hardware\arduino\avr\cores\arduino/USBAPI.h \
  C:\Program\ Files\ (x86)\Arduino\hardware\arduino\avr\cores\arduino/Arduino.h \
- C:\Program\ Files\ (x86)\Arduino\hardware\arduino\avr\cores\arduino/USBDesc.h \
- C:\Program\ Files\ (x86)\Arduino\hardware\arduino\avr\cores\arduino/USBCore.h \
- C:\Program\ Files\ (x86)\Arduino\hardware\arduino\avr\variants\micro/pins_arduino.h \
- C:\Program\ Files\ (x86)\Arduino\hardware\arduino\avr\variants\micro/../leonardo/pins_arduino.h \
- C:\Users\tobnu\AppData\Local\V.Micro\Arduino\Builds\LED_Matrix\micro\pixeltypes.h \
- C:\Users\tobnu\AppData\Local\V.Micro\Arduino\Builds\LED_Matrix\micro\lib8tion.h \
- C:\Users\tobnu\AppData\Local\V.Micro\Arduino\Builds\LED_Matrix\micro\color.h \
- C:\Users\tobnu\AppData\Local\V.Micro\Arduino\Builds\LED_Matrix\micro\fastpin.h \
- C:\Users\tobnu\AppData\Local\V.Micro\Arduino\Builds\LED_Matrix\micro\fastpin_avr.h \
- C:\Users\tobnu\AppData\Local\V.Micro\Arduino\Builds\LED_Matrix\micro\fastpin_arm_k20.h \
- C:\Users\tobnu\AppData\Local\V.Micro\Arduino\Builds\LED_Matrix\micro\fastpin_arm_sam.h \
- C:\Users\tobnu\AppData\Local\V.Micro\Arduino\Builds\LED_Matrix\micro\fastspi.h \
- C:\Users\tobnu\AppData\Local\V.Micro\Arduino\Builds\LED_Matrix\micro\delay.h \
- C:\Users\tobnu\AppData\Local\V.Micro\Arduino\Builds\LED_Matrix\micro\fastspi_bitbang.h \
- C:\Users\tobnu\AppData\Local\V.Micro\Arduino\Builds\LED_Matrix\micro\fastspi_arm_k20.h \
- C:\Users\tobnu\AppData\Local\V.Micro\Arduino\Builds\LED_Matrix\micro\fastspi_arm_sam.h \
- C:\Users\tobnu\AppData\Local\V.Micro\Arduino\Builds\LED_Matrix\micro\fastspi_avr.h \
- C:\Users\tobnu\AppData\Local\V.Micro\Arduino\Builds\LED_Matrix\micro\fastspi_dma.h \
- C:\Users\tobnu\AppData\Local\V.Micro\Arduino\Builds\LED_Matrix\micro\clockless.h \
- C:\Users\tobnu\AppData\Local\V.Micro\Arduino\Builds\LED_Matrix\micro\clockless_trinket.h \
- C:\Users\tobnu\AppData\Local\V.Micro\Arduino\Builds\LED_Matrix\micro\clockless_arm_k20.h \
- C:\Users\tobnu\AppData\Local\V.Micro\Arduino\Builds\LED_Matrix\micro\clockless_arm_sam.h \
- C:\Users\tobnu\AppData\Local\V.Micro\Arduino\Builds\LED_Matrix\micro\clockless2.h \
- C:\Users\tobnu\AppData\Local\V.Micro\Arduino\Builds\LED_Matrix\micro\block_clockless.h \
- C:\Users\tobnu\AppData\Local\V.Micro\Arduino\Builds\LED_Matrix\micro\hsv2rgb.h \
- C:\Users\tobnu\AppData\Local\V.Micro\Arduino\Builds\LED_Matrix\micro\colorutils.h \
- C:\Users\tobnu\AppData\Local\V.Micro\Arduino\Builds\LED_Matrix\micro\colorpalettes.h \
- C:\Users\tobnu\AppData\Local\V.Micro\Arduino\Builds\LED_Matrix\micro\chipsets.h \
- C:\Users\tobnu\AppData\Local\V.Micro\Arduino\Builds\LED_Matrix\micro\./dmx.h \
- C:\Users\tobnu\AppData\Local\V.Micro\Arduino\Builds\LED_Matrix\micro\smartmatrix_t3.h \
- C:\Users\tobnu\AppData\Local\V.Micro\Arduino\Builds\LED_Matrix\micro\noise.h \
- C:\Users\tobnu\AppData\Local\V.Micro\Arduino\Builds\LED_Matrix\micro\power_mgt.h
+ C:\Program\ Files\ (x86)\Arduino\hardware\arduino\avr\variants\mega/pins_arduino.h \
+ C:\Users\tobnu\AppData\Local\V.Micro\Arduino\Builds\LED_Matrix\mega_atmega2560\pixeltypes.h \
+ C:\Users\tobnu\AppData\Local\V.Micro\Arduino\Builds\LED_Matrix\mega_atmega2560\lib8tion.h \
+ C:\Users\tobnu\AppData\Local\V.Micro\Arduino\Builds\LED_Matrix\mega_atmega2560\color.h \
+ C:\Users\tobnu\AppData\Local\V.Micro\Arduino\Builds\LED_Matrix\mega_atmega2560\fastpin.h \
+ C:\Users\tobnu\AppData\Local\V.Micro\Arduino\Builds\LED_Matrix\mega_atmega2560\fastpin_avr.h \
+ C:\Users\tobnu\AppData\Local\V.Micro\Arduino\Builds\LED_Matrix\mega_atmega2560\fastpin_arm_k20.h \
+ C:\Users\tobnu\AppData\Local\V.Micro\Arduino\Builds\LED_Matrix\mega_atmega2560\fastpin_arm_sam.h \
+ C:\Users\tobnu\AppData\Local\V.Micro\Arduino\Builds\LED_Matrix\mega_atmega2560\fastspi.h \
+ C:\Users\tobnu\AppData\Local\V.Micro\Arduino\Builds\LED_Matrix\mega_atmega2560\delay.h \
+ C:\Users\tobnu\AppData\Local\V.Micro\Arduino\Builds\LED_Matrix\mega_atmega2560\fastspi_bitbang.h \
+ C:\Users\tobnu\AppData\Local\V.Micro\Arduino\Builds\LED_Matrix\mega_atmega2560\fastspi_arm_k20.h \
+ C:\Users\tobnu\AppData\Local\V.Micro\Arduino\Builds\LED_Matrix\mega_atmega2560\fastspi_arm_sam.h \
+ C:\Users\tobnu\AppData\Local\V.Micro\Arduino\Builds\LED_Matrix\mega_atmega2560\fastspi_avr.h \
+ C:\Users\tobnu\AppData\Local\V.Micro\Arduino\Builds\LED_Matrix\mega_atmega2560\fastspi_dma.h \
+ C:\Users\tobnu\AppData\Local\V.Micro\Arduino\Builds\LED_Matrix\mega_atmega2560\clockless.h \
+ C:\Users\tobnu\AppData\Local\V.Micro\Arduino\Builds\LED_Matrix\mega_atmega2560\clockless_trinket.h \
+ C:\Users\tobnu\AppData\Local\V.Micro\Arduino\Builds\LED_Matrix\mega_atmega2560\clockless_arm_k20.h \
+ C:\Users\tobnu\AppData\Local\V.Micro\Arduino\Builds\LED_Matrix\mega_atmega2560\clockless_arm_sam.h \
+ C:\Users\tobnu\AppData\Local\V.Micro\Arduino\Builds\LED_Matrix\mega_atmega2560\clockless2.h \
+ C:\Users\tobnu\AppData\Local\V.Micro\Arduino\Builds\LED_Matrix\mega_atmega2560\block_clockless.h \
+ C:\Users\tobnu\AppData\Local\V.Micro\Arduino\Builds\LED_Matrix\mega_atmega2560\hsv2rgb.h \
+ C:\Users\tobnu\AppData\Local\V.Micro\Arduino\Builds\LED_Matrix\mega_atmega2560\colorutils.h \
+ C:\Users\tobnu\AppData\Local\V.Micro\Arduino\Builds\LED_Matrix\mega_atmega2560\colorpalettes.h \
+ C:\Users\tobnu\AppData\Local\V.Micro\Arduino\Builds\LED_Matrix\mega_atmega2560\chipsets.h \
+ C:\Users\tobnu\AppData\Local\V.Micro\Arduino\Builds\LED_Matrix\mega_atmega2560\./dmx.h \
+ C:\Users\tobnu\AppData\Local\V.Micro\Arduino\Builds\LED_Matrix\mega_atmega2560\smartmatrix_t3.h \
+ C:\Users\tobnu\AppData\Local\V.Micro\Arduino\Builds\LED_Matrix\mega_atmega2560\noise.h \
+ C:\Users\tobnu\AppData\Local\V.Micro\Arduino\Builds\LED_Matrix\mega_atmega2560\power_mgt.h
