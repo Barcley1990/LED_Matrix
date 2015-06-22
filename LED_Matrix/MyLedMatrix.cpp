@@ -105,19 +105,21 @@ void MyLedMatrix::MoveRight(uint8_t steps)
 	uint8_t shiftedX, shiftedY;
 	uint16_t position;
 	
-	// for debugging purpose only
-	Serial.print("pixels: ");
-	Serial.println(*pixels);
 	
 	for (uint8_t i=0; i<m_maxleds; i++)
 	{		
-		position = *pixels;
 		// for debugging purpose only
+		Serial.print("pixels: ");
+		Serial.println(*pixels);
 		Serial.print("Position: ");
 		Serial.println(position);
-		uint8_t color = Adafruit_NeoPixel::getPixelColor(position);
-		Adafruit_NeoPixel::resetPixel(position);
+		position = *pixels;
 	
+		uint8_t color = Adafruit_NeoPixel::getPixelColor(position);		
+		Serial.print("Color: ");
+		Serial.println(color);
+		
+		Adafruit_NeoPixel::resetPixel(position);	
 		GetXY(position, &shiftedX, &shiftedY);
 		Adafruit_NeoPixel::setPixelColor(SetXY(shiftedX+steps, shiftedY), color); 
 		pixels++;

@@ -42,9 +42,19 @@ void setup()
 	matrix.show(); // Initialize all pixels to 'off'
 
     //matrix.SetChar('H', 255, 0 ,0, 0, 0);
-    matrix.SetText("Hello World", 255, 0, 0);
-    matrix.show();
+    //matrix.SetText("Hello World", 255, 0, 0);
+  //  matrix.show();
  
+ 
+ matrix.SetChar('H', 255,255 ,255, 0, 0);
+ matrix.show();
+ matrix.MoveRight(1);
+ matrix.setPixelColor(0,255,0,0);
+// matrix.FillScreen(255,255,255);
+ delay(100);
+ 
+
+ //Serial.println( *matrix.getPixels() );
 }
 
 void loop()
