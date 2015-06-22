@@ -11,6 +11,10 @@
 #ifndef __MYLEDMATRIX_H__
 #define __MYLEDMATRIX_H__
 
+#define RED		Adafruit_NeoPixel::Color(255, 0, 0)
+#define BLUE	Adafruit_NeoPixel::Color(0, 255, 0)
+#define GREEN	Adafruit_NeoPixel::Color(0, 0, 255)
+#define WHITE	Adafruit_NeoPixel::Color(255, 255, 255)
 
 class MyLedMatrix : public Adafruit_NeoPixel
 {
@@ -22,12 +26,12 @@ public:
 	void ClearScreen();
 	
 	void SetText(char *text, uint8_t r, uint8_t g, uint8_t b);
-        void SetChar(char ch, uint8_t r, uint8_t g, uint8_t b, uint8_t offsetX, uint8_t OffsetY);
-	void MoveRight();
+    void SetChar(char ch, uint8_t r, uint8_t g, uint8_t b, uint8_t offsetX, uint8_t OffsetY);
+	void MoveRight(uint8_t steps);
 	void MoveLeft();
 	void MoveUp();
 	void MoveDown();
-        uint16_t SetXY(uint8_t x, uint8_t y);
+	uint16_t SetXY(uint8_t x, uint8_t y);
 
 	
 	

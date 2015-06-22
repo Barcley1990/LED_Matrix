@@ -84,6 +84,12 @@ void MyLedMatrix::SetChar(char ch, uint8_t r, uint8_t g, uint8_t b, uint8_t offs
     }
 }
 
+void MyLedMatrix::MoveRight(uint8_t steps)
+{
+	//uint8_t pixels = Adafruit_NeoPixel::getPixels();
+	
+}
+
 
 
 
