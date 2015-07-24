@@ -16,11 +16,14 @@ class Snake : public MyLedMatrix
 public:
   Snake(uint8_t h, uint8_t w, uint8_t l, uint8_t p, uint8_t t=NEO_GRB + NEO_KHZ800);
   void Move();
+  void Game();
 
 
 private:
-  int x=0;
-  int y=0;
+  int m_snakeX;
+  int m_snakeY;
+  int m_feedX;
+  int m_feedY;
 	
 	
 
