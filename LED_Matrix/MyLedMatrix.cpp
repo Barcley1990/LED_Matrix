@@ -77,6 +77,7 @@ void MyLedMatrix::SetText(char *text, uint8_t r, uint8_t g, uint8_t b)
      {
        //char *ch = &text[i];
        SetChar(text[i], r ,g ,b, m_width-i, 0);
+       Adafruit_NeoPixel::show();
        delay(100);
      }   
 }

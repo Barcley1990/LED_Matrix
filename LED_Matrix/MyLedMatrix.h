@@ -11,7 +11,7 @@
 #ifndef __MYLEDMATRIX_H__
 #define __MYLEDMATRIX_H__
 
-#define RED		Adafruit_NeoPixel::Color(255, 0, 0)
+#define RED     Adafruit_NeoPixel::Color(255, 0, 0)
 #define BLUE	Adafruit_NeoPixel::Color(0, 255, 0)
 #define GREEN	Adafruit_NeoPixel::Color(0, 0, 255)
 #define WHITE	Adafruit_NeoPixel::Color(255, 255, 255)
