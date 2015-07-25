@@ -75,8 +75,7 @@ if(inChar == 'a'){
 }
 
 
-void Snake::Game(uint8_t wait)
-{
+void Snake::Game(uint8_t wait) {
   char inChar = (char)Serial1.read();  
     if(inChar == 'd'){  // rigth
      m_turn++;
@@ -92,22 +91,21 @@ void Snake::Game(uint8_t wait)
 
     MyLedMatrix::setPixelColor(MyLedMatrix::SetXY(m_snakeX, m_snakeY), 0, 0, 0);
     
-    if(m_turn<0) m_turn=3;  if(m_turn>3) m_turn=0;
-    if(m_turn == 0) {
-      if(m_snakeX>=11) m_snakeX=-1;
-      MyLedMatrix::setPixelColor(MyLedMatrix::SetXY(++m_snakeX, m_snakeY), 155, 0, 0);
-    }
-    if(m_turn == 1) {
-      if(m_snakeY>=9) m_snakeY=-1;
-      MyLedMatrix::setPixelColor(MyLedMatrix::SetXY(m_snakeX, ++m_snakeY), 155, 0, 0);
-    }
-    if(m_turn == 2) {
-      if(m_snakeX<=0) m_snakeX=12;
-      MyLedMatrix::setPixelColor(MyLedMatrix::SetXY(--m_snakeX, m_snakeY), 155, 0, 0);
-    }
-    if(m_turn == 3) {
-      if(m_snakeY<=0) m_snakeY=10;
-      MyLedMatrix::setPixelColor(MyLedMatrix::SetXY(m_snakeX, --m_snakeY), 155, 0, 0);
+    if(m_turn<0) m_turn = 3;  if(m_turn>3) m_turn = 0;
+
+    switch(m_turn) {
+      case 0 :  if(m_snakeX>=11) m_snakeX=-1; 
+                MyLedMatrix::setPixelColor(MyLedMatrix::SetXY(++m_snakeX, m_snakeY), 155, 0, 0);               
+        break;
+      case 1 :  if(m_snakeY>=9) m_snakeY=-1; 
+                MyLedMatrix::setPixelColor(MyLedMatrix::SetXY(m_snakeX, ++m_snakeY), 155, 0, 0);              
+        break;
+      case 2 :  if(m_snakeX<=0) m_snakeX=12;
+                MyLedMatrix::setPixelColor(MyLedMatrix::SetXY(--m_snakeX, m_snakeY), 155, 0, 0);              
+        break;
+      case 3 :  if(m_snakeY<=0) m_snakeY=10; 
+                MyLedMatrix::setPixelColor(MyLedMatrix::SetXY(m_snakeX, --m_snakeY), 155, 0, 0);            
+        break;
     }
     delay(wait);    
     MyLedMatrix::setPixelColor(MyLedMatrix::SetXY(m_feedX, m_feedY), 0, 155, 0);
@@ -120,7 +118,6 @@ void Snake::PlaceFood(){
   m_feedX = random(0,11);
   m_feedY = random(0,9); 
   MyLedMatrix::setPixelColor(MyLedMatrix::SetXY(m_feedX,m_feedY), 0, 155, 0);
-  MyLedMatrix::show();
 }
 
 
