@@ -92,20 +92,19 @@ void Snake::Game(uint8_t wait) {
     MyLedMatrix::setPixelColor(MyLedMatrix::SetXY(m_snakeX, m_snakeY), 0, 0, 0);
     
     if(m_turn<0) m_turn = 3;  if(m_turn>3) m_turn = 0;
-
     switch(m_turn) {
       case 0 :  if(m_snakeX>=11) m_snakeX=-1; 
                 MyLedMatrix::setPixelColor(MyLedMatrix::SetXY(++m_snakeX, m_snakeY), 155, 0, 0);               
-        break;
+                break;
       case 1 :  if(m_snakeY>=9) m_snakeY=-1; 
                 MyLedMatrix::setPixelColor(MyLedMatrix::SetXY(m_snakeX, ++m_snakeY), 155, 0, 0);              
-        break;
+                break;
       case 2 :  if(m_snakeX<=0) m_snakeX=12;
                 MyLedMatrix::setPixelColor(MyLedMatrix::SetXY(--m_snakeX, m_snakeY), 155, 0, 0);              
-        break;
+                break;
       case 3 :  if(m_snakeY<=0) m_snakeY=10; 
                 MyLedMatrix::setPixelColor(MyLedMatrix::SetXY(m_snakeX, --m_snakeY), 155, 0, 0);            
-        break;
+                break;
     }
     delay(wait);    
     MyLedMatrix::setPixelColor(MyLedMatrix::SetXY(m_feedX, m_feedY), 0, 155, 0);
