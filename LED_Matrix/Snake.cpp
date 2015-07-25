@@ -88,8 +88,8 @@ void Snake::Game(uint8_t wait)
     PlaceFood();
   
  // if(m_snakeX>=11) m_snakeX=0;
- // if(m_snakeY>=9) m_snakeY=0;
- // if(m_snakeX<=0) m_snakeX=11;
+//if(m_snakeY>=9) m_snakeY=0;
+//if(m_snakeX<=0) m_snakeX=11;
   //if(m_snakeY<=0) m_snakeY=9;
   
   
@@ -100,35 +100,35 @@ void Snake::Game(uint8_t wait)
       MyLedMatrix::setPixelColor(MyLedMatrix::SetXY(m_feedX, m_feedY), 0, 155, 0);
       MyLedMatrix::setPixelColor(MyLedMatrix::SetXY(++m_snakeX, m_snakeY), 155, 0, 0);
       MyLedMatrix::show();
-      delay(wait);
     }
     if(m_turn == 1) {
       MyLedMatrix::setPixelColor(MyLedMatrix::SetXY(m_feedX, m_feedY), 0, 155, 0);
       MyLedMatrix::setPixelColor(MyLedMatrix::SetXY(m_snakeX, ++m_snakeY), 155, 0, 0);
       MyLedMatrix::show();
-      delay(wait);
     }
     if(m_turn == 2) {
       MyLedMatrix::setPixelColor(MyLedMatrix::SetXY(m_feedX, m_feedY), 0, 155, 0);
       MyLedMatrix::setPixelColor(MyLedMatrix::SetXY(--m_snakeX, m_snakeY), 155, 0, 0);
       MyLedMatrix::show();
-      delay(wait);
     }
     if(m_turn == 3) {
       MyLedMatrix::setPixelColor(MyLedMatrix::SetXY(m_feedX, m_feedY), 0, 155, 0);
       MyLedMatrix::setPixelColor(MyLedMatrix::SetXY(m_snakeX, --m_snakeY), 155, 0, 0);
       MyLedMatrix::show();
-      delay(wait);
     }
     if(m_turn>3){
+      MyLedMatrix::setPixelColor(MyLedMatrix::SetXY(m_feedX, m_feedY), 0, 155, 0);
+      MyLedMatrix::setPixelColor(MyLedMatrix::SetXY(++m_snakeX, m_snakeY), 155, 0, 0);
+      MyLedMatrix::show();
       m_turn=0;
-      delay(wait);
     }
     if(m_turn<0){
-      m_turn=3ssd;
-      delay(wait);
+      MyLedMatrix::setPixelColor(MyLedMatrix::SetXY(m_feedX, m_feedY), 0, 155, 0);
+      MyLedMatrix::setPixelColor(MyLedMatrix::SetXY(m_snakeX, --m_snakeY), 155, 0, 0);
+      MyLedMatrix::show();
+      m_turn=3;
     }
-    
+    delay(wait);
   
 
 }

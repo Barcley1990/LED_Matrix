@@ -38,6 +38,10 @@ void MyLedMatrix::ClearScreen()
 uint16_t MyLedMatrix::SetXY(uint8_t x, uint8_t y)
 {
   uint16_t i;
+  if(x>m_width-1) x = m_width-1;
+  if(y>m_height-1) y = m_height-1;
+  if(x<0) x = 0;
+  if(y<0) y = 0;
   
     if( y & 0x01)
     {

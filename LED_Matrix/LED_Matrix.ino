@@ -76,7 +76,10 @@ void loop(){
       n=0;
   }*/
   
-  snake.Game(1000);
+  //snake.Game(1000);
+  matrix.setPixelColor(matrix.SetXY(12,0),155,0,0);
+  matrix.show();
+  delay(5000);
 }
  
 
