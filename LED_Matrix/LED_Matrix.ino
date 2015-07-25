@@ -46,24 +46,37 @@ Snake snake = Snake(height, width, leds, pin, NEO_GRB + NEO_KHZ800);
 void setup() {
    pinMode(13, OUTPUT);
    
-	// This is for Trinket 5V 16MHz, you can remove these three lines if you are not using a Trinket
-	#if defined (__AVR_ATtiny85__)
-	if (F_CPU == 16000000) clock_prescale_set(clock_div_1);
-	#endif
-	// End of trinket special code
-	matrix.begin();
-	matrix.show(); // Initialize all pixels to 'off'
-   
-    Serial1.begin(19200);
+    // This is for Trinket 5V 16MHz, you can remove these three lines if you are not using a Trinket
+    #if defined (__AVR_ATtiny85__)
+    if (F_CPU == 16000000) clock_prescale_set(clock_div_1);
+    #endif
+    // End of trinket special code
+    matrix.begin();
+    matrix.show(); // Initialize all pixels to 'off'
+    Serial1.begin(19200);     
     //while(!Serial1);
+    //Serial.begin(9600);
+    
     // reserve 200 bytes for the inputString:
     inputString.reserve(200);
 
 }
+uint8_t n = 0;
 
 void loop(){
   //serialEvent();
-  snake.Move();
+/*  while(!Serial){
+    matrix.setPixelColor(n,50,50,50);
+    matrix.show();
+    delay(100);
+    matrix.setPixelColor(n-1,0,0,0);
+    matrix.show();
+    n++;
+    if(n>leds)
+      n=0;
+  }*/
+  
+  snake.Game(1000);
 }
  
 
