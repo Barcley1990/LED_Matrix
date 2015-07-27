@@ -20,16 +20,24 @@ public:
   void Move();
   void Game(uint8_t wait);
   void PlaceFood();
+  
 
 private:
-  int m_snakeX;
-  int m_snakeY;
-  int m_feedX;
-  int m_feedY;
-  int m_turn;
-
-
+  uint8_t m_snakeX;
+  uint8_t m_snakeY;
+  uint8_t m_length;
+  uint8_t m_feedX;
+  uint8_t m_feedY;
+  int8_t m_turn;
+  
+ 
 
 }; //Snake
 
+
+
+
 #endif //__SNAKE_H__
+
+
+
