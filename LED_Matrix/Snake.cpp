@@ -26,17 +26,17 @@ void Snake::Restart()
    for(int i=0; i<120; i++) {
     snakeOld[i] = -1; 
    }
-   pOld = snakeOld;
-   MyLedMatrix::ClearScreen();
-   
+   pOld = snakeOld;  
 }
 
 int Snake::Game(uint8_t wait) {
   char inChar = (char)Serial1.read();  
-    if(inChar == 'd')  // rigth
+    if(inChar == 'R')  // rigth
       m_turn++;
-    if(inChar == 's')  // left
+    if(inChar == 'L')  // left
       m_turn--;
+    if(inChar == 'X')  // exit
+      return 0;
 
   MyLedMatrix::ClearScreen();
   
@@ -66,6 +66,20 @@ int Snake::Game(uint8_t wait) {
     for(int j = 120; j>=0; j--){
         if(ledVal == snakeOld[j]) {
           Serial1.println("crash!!!");
+          while((char)Serial1.read() != 'X') {
+            MyLedMatrix::setPixelColor(ledVal, 0, 0, 155);
+            for(int i=0; i<120; i++) {
+              snakeOld[i-1] = snakeOld[i];
+              MyLedMatrix::setPixelColor(snakeOld[i], 155, 0, 0);
+            }  
+            MyLedMatrix::show();
+            delay(100);
+            MyLedMatrix::setPixelColor(ledVal, 0, 0, 0);
+            MyLedMatrix::show();
+            delay(100);
+          }
+          MyLedMatrix::ClearScreen();
+          MyLedMatrix::show();
           Restart();
           return 0;
         }
