@@ -23,7 +23,7 @@ void MyLedMatrix::FillScreen(uint8_t r, uint8_t g, uint8_t b)
 	{
 		Adafruit_NeoPixel::setPixelColor(i,r,g,b);
 	}
-        Adafruit_NeoPixel::show();
+        //Adafruit_NeoPixel::show();
 }
 
 void MyLedMatrix::ClearScreen()
@@ -32,7 +32,7 @@ void MyLedMatrix::ClearScreen()
 	{
 		Adafruit_NeoPixel::setPixelColor(i,0,0,0);
 	}
-	Adafruit_NeoPixel::show();
+	//Adafruit_NeoPixel::show();
 }
 
 uint16_t MyLedMatrix::SetXY(uint8_t x, uint8_t y)
