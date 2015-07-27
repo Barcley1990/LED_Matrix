@@ -13,17 +13,25 @@
 // default constructor
 Snake::Snake(uint8_t h, uint8_t w, uint8_t l, uint8_t p, uint8_t t) : MyLedMatrix(h, w, l, p, t)
 {
-  m_snakeX = 0;
-  m_snakeY = 0;	
-  m_feedX  = 5;
-  m_feedY  = 5;
-  m_turn = 0;
-  
- for(int i=0; i<120; i++)
-    snakeOld[i] = -1; 
+  Restart();
 } 
 
-void Snake::Game(uint8_t wait) {
+void Snake::Restart()
+{
+   m_snakeX = 0;
+   m_snakeY = 0;	
+   m_feedX  = 5;
+   m_feedY  = 5;
+   m_turn = 0;
+   for(int i=0; i<120; i++) {
+    snakeOld[i] = -1; 
+   }
+   pOld = snakeOld;
+   MyLedMatrix::ClearScreen();
+   
+}
+
+int Snake::Game(uint8_t wait) {
   char inChar = (char)Serial1.read();  
     if(inChar == 'd')  // rigth
       m_turn++;
@@ -56,8 +64,11 @@ void Snake::Game(uint8_t wait) {
    
     /* am I crashed? */   
     for(int j = 120; j>=0; j--){
-        if( (ledVal == snakeOld[j]) )
+        if(ledVal == snakeOld[j]) {
           Serial1.println("crash!!!");
+          Restart();
+          return 0;
+        }
     } 
     /* write to array snakeOld */
     *pOld = ledVal; 

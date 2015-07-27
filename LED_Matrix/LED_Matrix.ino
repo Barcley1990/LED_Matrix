@@ -75,8 +75,10 @@ void loop(){
     if(n>leds)
       n=0;
   }*/
-  
-  snake.Game(1000);
+  char inChar = (char)Serial1.read();  
+  if(inChar == 'p')
+    while(snake.Game(1000));
+     
  
 }
  
