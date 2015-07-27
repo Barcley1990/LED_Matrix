@@ -1,4 +1,4 @@
- /* 
+/* 
 * Sanke.h
 *
 * Created: 24.07.2015 14:57:01
@@ -21,6 +21,9 @@ public:
   void Game(uint8_t wait);
   void PlaceFood();
   
+  uint8_t snakeOld[120];
+  uint8_t *pOld = snakeOld;
+  int ledVal = 0;
 
 private:
   uint8_t m_snakeX;
@@ -30,7 +33,6 @@ private:
   uint8_t m_feedY;
   int8_t m_turn;
   
- 
 
 }; //Snake
 
