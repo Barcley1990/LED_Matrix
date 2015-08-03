@@ -26,7 +26,7 @@ public:
 	void ClearScreen();
 	
 	void SetText(char *text, uint8_t r, uint8_t g, uint8_t b);
-    void SetChar(char ch, uint8_t r, uint8_t g, uint8_t b, uint8_t offsetX, uint8_t OffsetY);
+        void SetChar(char ch, uint8_t r, uint8_t g, uint8_t b, uint8_t offsetX, uint8_t OffsetY);
 	void MoveRight(uint8_t steps);
 	void MoveLeft();
 	void MoveUp();

@@ -88,7 +88,7 @@ void MyLedMatrix::SetText(char *text, uint8_t r, uint8_t g, uint8_t b)
 
 void MyLedMatrix::SetChar(char ch, uint8_t r, uint8_t g, uint8_t b, uint8_t offsetX, uint8_t offsetY)
 {
-    uint8_t i = ch*3;
+    uint8_t i = ch*5;
     char *ptr = &font[i+1];
 
     for(uint8_t x=0; x<=2; x++)

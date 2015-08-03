@@ -12,7 +12,10 @@
 #include "Adafruit_NeoPixel.h"
 #include "MyLedMatrix.h"
 #include "Snake.h"
+#include "Pixels.h"
 
+#define quitButton O
+char quitButton = 'O';
 
 #define BRIGHTNESS 64
 
@@ -38,7 +41,8 @@ volatile uint8_t uart_timeout = 0;
 //Adafruit_NeoPixel strip = Adafruit_NeoPixel(leds, pin, NEO_GRB + NEO_KHZ800);
 
 MyLedMatrix matrix = MyLedMatrix(height, width, leds, pin, NEO_GRB + NEO_KHZ800);
-Snake snake = Snake(height, width, leds, pin, NEO_GRB + NEO_KHZ800);
+Snake snake =  Snake(quitButton, height, width, leds, pin, NEO_GRB + NEO_KHZ800);
+Pixels pixels = Pixels(quitButton, height, width, leds, pin, NEO_GRB + NEO_KHZ800);
 
 
 
@@ -59,29 +63,37 @@ void setup() {
     
     // reserve 200 bytes for the inputString:
     inputString.reserve(200);
-
+  
+  for(int i=0; i<10; i++) {
+    matrix.SetChar(i,155,0,0,5,0);
+    matrix.show();
+    delay(200);
+    matrix.ClearScreen();
+    matrix.show();
+  }
+    
 }
 uint8_t n = 0;
 
 void loop(){
-  //serialEvent();
-/*  while(!Serial){
-    matrix.setPixelColor(n,50,50,50);
-    matrix.show();
-    delay(100);
-    matrix.setPixelColor(n-1,0,0,0);
-    matrix.show();
-    n++;
-    if(n>leds)
-      n=0;
-  }*/
   
-  char inChar = (char)Serial1.read();  
+  char inChar = (char)Serial1.read();
   if(inChar == 'X')
-      while(snake.Game(1000));
+    while(snake.Game(1000));
+  if(inChar == '1')
+    while(pixels.Rainbow(20));
+  if(inChar == '2')
+    while(pixels.colorWipe(20, BLUE));
+  if(inChar == '3')
+    while(pixels.rainbowCycle(20));  
+  if(inChar == '4')
+    while(pixels.theaterChaseRainbow(20));  
 
-      
- 
+   matrix.ClearScreen();
+   matrix.show();
+   blink();
+   
+  
 }
  
 
@@ -104,4 +116,10 @@ void serialEvent()
 		 }
 	}
 }
-	
+
+void blink() {
+  digitalWrite(13, HIGH);
+  delay(100);
+  digitalWrite(13, LOW);
+  delay(100);
+}	
