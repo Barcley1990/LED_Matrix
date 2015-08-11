@@ -17,11 +17,12 @@ Pixels::Pixels(char qb, uint8_t h, uint8_t w, uint8_t l, uint8_t p, uint8_t t) :
   m_width = w;
   char m_quitButton = qb;
 }
-char QuitButton;
+
 
 // Input a value 0 to 255 to get a color value.
 // The colours are a transition r - g - b - back to r.
-uint32_t Pixels::Wheel(byte WheelPos) {
+uint32_t Pixels::Wheel(byte WheelPos) 
+{
   WheelPos = 255 - WheelPos;
   if(WheelPos < 85) {
    return MyLedMatrix::Color(255 - WheelPos * 3, 0, WheelPos * 3);
@@ -34,11 +35,12 @@ uint32_t Pixels::Wheel(byte WheelPos) {
   }
 }
 
-int Pixels::Rainbow(uint8_t wait) {
+int Pixels::Rainbow(uint8_t wait) 
+{
   uint16_t i, j;
   for(j=0; j<256*5; j++) { // 5 cycles of all colors on wheel
     for(i=0; i< MyLedMatrix::numPixels(); i++) {
-      if( (char)Serial1.read() == 'O') {        
+      if( (char)Serial.read() == 'O') {        
         return 0;
         break;    
       }
@@ -47,12 +49,15 @@ int Pixels::Rainbow(uint8_t wait) {
     MyLedMatrix::show();
     delay(wait);
   }
+  return 1;
 }
 
 // Fill the dots one after the other with a color
-int Pixels::colorWipe(uint32_t c, uint8_t wait) {
+int Pixels::colorWipe(uint32_t c, uint8_t wait) 
+{
   for(uint16_t i=0; i<MyLedMatrix::numPixels(); i++) {
-    if( (char)Serial1.read() == 'O') {        
+    
+    if( (char)Serial.read() == 'O') {        
         return 0;
         break;    
       }
@@ -68,7 +73,7 @@ int Pixels::rainbowCycle(uint8_t wait) {
 
   for(j=0; j<256*5; j++) { // 5 cycles of all colors on wheel
     for(i=0; i< MyLedMatrix::numPixels(); i++) {
-      if( (char)Serial1.read() == 'O') {        
+      if( (char)Serial.read() == 'O') {        
         return 0;
         break;    
       }
@@ -84,7 +89,7 @@ int Pixels::theaterChaseRainbow(uint8_t wait) {
   for (int j=0; j < 256; j++) {     // cycle all 256 colors in the wheel
     for (int q=0; q < 3; q++) {
         for (int i=0; i < MyLedMatrix::numPixels(); i=i+3) {
-          if( (char)Serial1.read() == 'O') {        
+          if( (char)Serial.read() == 'O') {        
           return 0;
           break;    
       }

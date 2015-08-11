@@ -17,6 +17,7 @@ class Snake : public MyLedMatrix
 {
 public:
   Snake(char qb, uint8_t h, uint8_t w, uint8_t l, uint8_t p, uint8_t t=NEO_GRB + NEO_KHZ800);
+  ~Snake();
   void Restart();
   void Move();
   int Game(uint8_t wait);
@@ -39,6 +40,7 @@ private:
   uint8_t m_firstDigit;
   uint8_t m_secondDigit;
   uint8_t m_thirdDigit;
+  bool m_init;
 
 }; //Snake
 

@@ -12,10 +12,16 @@
 // default constructor
 MyLedMatrix::MyLedMatrix(uint8_t h, uint8_t w, uint8_t l, uint8_t p, uint8_t t) : Adafruit_NeoPixel(l, p, t)
 {
+  Serial.println("MyLedMatrix->Constructor");
 	m_height = h;
 	m_width = w;
 	m_maxleds = m_height*m_width;
 } 
+
+MyLedMatrix::~MyLedMatrix()
+{
+  Serial.println("MyLedMatrix->Destructor");
+}
 
 void MyLedMatrix::FillScreen(uint8_t r, uint8_t g, uint8_t b)
 {

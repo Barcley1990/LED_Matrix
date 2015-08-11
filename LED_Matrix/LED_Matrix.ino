@@ -13,6 +13,8 @@
 #include "MyLedMatrix.h"
 #include "Snake.h"
 #include "Pixels.h"
+#include "SpaceInvaders.h"
+#include "Pong.h"
 
 #define quitButton O
 char quitButton = 'O';
@@ -41,11 +43,6 @@ volatile uint8_t uart_timeout = 0;
 //Adafruit_NeoPixel strip = Adafruit_NeoPixel(leds, pin, NEO_GRB + NEO_KHZ800);
 
 MyLedMatrix matrix = MyLedMatrix(height, width, leds, pin, NEO_GRB + NEO_KHZ800);
-Snake snake =  Snake(quitButton, height, width, leds, pin, NEO_GRB + NEO_KHZ800);
-Pixels pixels = Pixels(quitButton, height, width, leds, pin, NEO_GRB + NEO_KHZ800);
-
-
-
 
 void setup() {
    pinMode(13, OUTPUT);
@@ -57,10 +54,9 @@ void setup() {
     // End of trinket special code
     matrix.begin();
     matrix.show(); // Initialize all pixels to 'off'
-    Serial1.begin(19200);     
+    Serial.begin(19200);     
     //while(!Serial1);
-    //Serial.begin(9600);
-    
+    Serial.println("Bereit"); 
     // reserve 200 bytes for the inputString:
     inputString.reserve(200);
   
@@ -71,23 +67,39 @@ void setup() {
     matrix.ClearScreen();
     matrix.show();
   }
-    
 }
 uint8_t n = 0;
 
+
 void loop(){
   
-  char inChar = (char)Serial1.read();
-  if(inChar == 'X')
-    while(snake.Game(1000));
-  if(inChar == '1')
-    while(pixels.Rainbow(20));
-  if(inChar == '2')
-    while(pixels.colorWipe(20, BLUE));
-  if(inChar == '3')
-    while(pixels.rainbowCycle(20));  
-  if(inChar == '4')
-    while(pixels.theaterChaseRainbow(20));  
+  char inChar = (char)Serial.read();
+  if(inChar == 'X') {
+    Snake* snake = new Snake(quitButton, height, width, leds, pin, NEO_GRB + NEO_KHZ800);
+    while(snake->Game(1000));
+    delete snake;   
+  }
+  if(inChar == 'D') {
+    Pong* pong = new Pong(quitButton, height, width, leds, pin, NEO_GRB + NEO_KHZ800);
+    while(pong->Game());
+     delete pong;
+  }
+  if(inChar == '1') {
+     Pixels* pixels = new Pixels(quitButton, height, width, leds, pin, NEO_GRB + NEO_KHZ800);
+     while(pixels->Rainbow(20));
+     delete pixels;
+  }
+   if(inChar == '2') {
+     Pixels* pixels = new Pixels(quitButton, height, width, leds, pin, NEO_GRB + NEO_KHZ800);
+     while(pixels->colorWipe(20, BLUE));
+     delete pixels;
+  }
+   if(inChar == '3') {
+     Pixels* pixels = new Pixels(quitButton, height, width, leds, pin, NEO_GRB + NEO_KHZ800);
+     while(pixels->theaterChaseRainbow(20));
+     delete pixels;
+  }
+ 
 
    matrix.ClearScreen();
    matrix.show();
@@ -97,25 +109,8 @@ void loop(){
 }
  
 
-void serialEvent()
-{
-	while(Serial1.available())
-	{                                
-		transmit_started = true;
-		// get the new byte:
-		char inChar = (char)Serial1.read();
-		// add it to the inputString:
-		inputString += inChar;
-		// if the incoming character is a newline, set a flag
-		// so the main loop can do something about it:
-		if (inChar == '\n' || inChar == '\r')
-		{
-			stringComplete = true;
-			uart_timeout = 0;
-			transmit_started = false;
-		 }
-	}
-}
+	
+
 
 void blink() {
   digitalWrite(13, HIGH);

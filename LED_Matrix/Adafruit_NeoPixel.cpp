@@ -41,6 +41,7 @@ Adafruit_NeoPixel::Adafruit_NeoPixel(uint16_t n, uint8_t p, uint8_t t) :
    pinMask(digitalPinToBitMask(p))
 #endif
 {
+  Serial.println("Adafruit_NeoPixel->Constructor");
   if((pixels = (uint8_t *)malloc(numBytes))) {
     memset(pixels, 0, numBytes);
   }
@@ -56,13 +57,13 @@ Adafruit_NeoPixel::Adafruit_NeoPixel(uint16_t n, uint8_t p, uint8_t t) :
     rOffset = 0;
     gOffset = 1;
     bOffset = 2;
-  }
-  
+  } 
 }
 
 Adafruit_NeoPixel::~Adafruit_NeoPixel() {
+  Serial.println("Adafruit_NeoPixel->Destructor");
   if(pixels) free(pixels);
-  pinMode(pin, INPUT);
+ // pinMode(pin, INPUT);
 }
 
 void Adafruit_NeoPixel::begin(void) {

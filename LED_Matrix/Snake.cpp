@@ -13,15 +13,22 @@
 // default constructor
 Snake::Snake(char qb, uint8_t h, uint8_t w, uint8_t l, uint8_t p, uint8_t t) : MyLedMatrix(h, w, l, p, t)
 {
+  Serial.println("Snake->Constructor");
   Restart();
   char m_quitButton = 'O';
-  m_gameCounter = 0;
+  m_init = false;
+  
 } 
 
-
+Snake::~Snake()
+{
+  Serial.println("Snake->Destructor");
+  pOld=NULL;
+}
 
 void Snake::Restart()
 {
+  Serial.println("Snake->Restart");
    m_gameCounter = 0;
    m_snakeX = 0;
    m_snakeY = 0;	
@@ -32,12 +39,17 @@ void Snake::Restart()
     snakeOld[i] = -1; 
    }
    pOld = snakeOld;  
+   m_init = false;
+  // MyLedMatrix::ClearScreen();
+ //  MyLedMatrix::show();
 }
 
 
-
-int Snake::Game(uint8_t wait) {
-  char inChar = (char)Serial1.read();  
+int Snake::Game(uint8_t wait) 
+{
+  if(m_init = false) 
+    Restart();    
+  char inChar = (char)Serial.read();  
     if(inChar == 'R')  // rigth
       m_turn++;
     if(inChar == 'L')  // left
@@ -50,7 +62,7 @@ int Snake::Game(uint8_t wait) {
   MyLedMatrix::ClearScreen();
   
   /* found some food? */
-  if( (m_feedX==m_snakeX) && (m_feedY==m_snakeY) ) {  
+  if( (m_feedX==m_snakeX) && (m_feedY==m_snakeY) ) { 
     PlaceFood();
     pOld++;
     m_gameCounter++;    
@@ -75,9 +87,9 @@ int Snake::Game(uint8_t wait) {
     /* am I crashed? */   
     for(int j = 120; j>=0; j--){
         if(ledVal == snakeOld[j]) {
-          Serial1.println("crash!!!");
+          Serial.println("Stnake->crash!!!");
 
-          while((char)Serial1.read() != 'X') {
+          while((char)Serial.read() != 'X') {
             MyLedMatrix::setPixelColor(ledVal, 155, 155, 155);
             for(int i=0; i<120; i++) {
               snakeOld[i-1] = snakeOld[i];
@@ -114,8 +126,7 @@ int Snake::Game(uint8_t wait) {
     MyLedMatrix::show();
        
     delay(wait);
-    
-
+    return 1;
 }
 
 void Snake::PlaceFood(){
@@ -133,12 +144,7 @@ void Snake::GameCounter() {
    m_firstDigit = m_gameCounter % 10;
    m_secondDigit = (m_gameCounter % 100) / 10;
    m_thirdDigit = (m_gameCounter % 1000) / 100;
-   
-/*  Serial1.println(m_gameCounter);
-   Serial1.println(m_firstDigit);
-   Serial1.println(m_secondDigit);
-   Serial1.println(m_thirdDigit);
-  */ 
+
    if(m_thirdDigit != 0)
       MyLedMatrix::SetChar(m_thirdDigit,155,0,0,0,0);
    if( (m_secondDigit != 0) || ((m_secondDigit == 0) && (m_thirdDigit != 0)) )
