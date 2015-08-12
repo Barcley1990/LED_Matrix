@@ -7,17 +7,34 @@
 
 
 #include "Snake.h"
-
+// __heap_start is declared in the linker script
+extern unsigned char __heap_start;
 
 // inherits from MyLedMatrix
 // default constructor
 Snake::Snake(char qb, uint8_t h, uint8_t w, uint8_t l, uint8_t p, uint8_t t) : MyLedMatrix(h, w, l, p, t)
 {
+	
   Serial.println("Snake->Constructor");
-  Restart();
+  Serial.println(" ");
   char m_quitButton = 'O';
   m_init = false;
   
+   m_gameCounter = 0;
+   m_snakeX = 0;
+   m_snakeY = 0;
+   m_feedX  = 5;
+   m_feedY  = 5;
+   m_turn = 0;
+   for(int i=0; i<120; i++) {
+	   snakeOld[i] = -1;
+   }
+   pOld = snakeOld;
+   m_init = false;  
+   
+   uint16_t momentan_frei = SP - (uint16_t) &__heap_start;
+   
+   Serial.print("momentan_frei: "); Serial.println(momentan_frei);
 } 
 
 Snake::~Snake()
@@ -29,19 +46,7 @@ Snake::~Snake()
 void Snake::Restart()
 {
   Serial.println("Snake->Restart");
-   m_gameCounter = 0;
-   m_snakeX = 0;
-   m_snakeY = 0;	
-   m_feedX  = 5;
-   m_feedY  = 5;
-   m_turn = 0;
-   for(int i=0; i<120; i++) {
-    snakeOld[i] = -1; 
-   }
-   pOld = snakeOld;  
-   m_init = false;
-  // MyLedMatrix::ClearScreen();
- //  MyLedMatrix::show();
+   
 }
 
 
@@ -50,12 +55,12 @@ int Snake::Game(uint8_t wait)
   if(m_init = false) 
     Restart();    
   char inChar = (char)Serial.read();  
-    if(inChar == 'R')  // rigth
+    if(inChar == 'R')  // 
       m_turn++;
     if(inChar == 'L')  // left
       m_turn--;
     if(inChar == 'O') { // exit
-      Restart();
+	  Serial.println("Snake->Quit");
       return 0;
     }
 
@@ -87,7 +92,7 @@ int Snake::Game(uint8_t wait)
     /* am I crashed? */   
     for(int j = 120; j>=0; j--){
         if(ledVal == snakeOld[j]) {
-          Serial.println("Stnake->crash!!!");
+          Serial.println("Snake->crash!!!");
 
           while((char)Serial.read() != 'X') {
             MyLedMatrix::setPixelColor(ledVal, 155, 155, 155);

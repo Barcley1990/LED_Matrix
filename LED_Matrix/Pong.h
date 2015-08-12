@@ -26,12 +26,11 @@ public:
 void TimerSetup();
 private:
   uint8_t m_move, m_height, m_width, m_enemy, m_ledVal;
-  uint8_t m_field[];
 
 
-  //int start = 4;
-  //int m_player[10] = {0,1,2,3,4,5,6,7,8,9};
-  //int *ptr;
+  int8_t start;
+  uint8_t m_player[10] = {0,1,2,3,4,5,6,7,8,9};
+  uint8_t *ptr;
   
   
 }; //Pong

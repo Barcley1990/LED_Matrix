@@ -7,60 +7,62 @@
 
 
 #include "Pong.h"
+// __heap_start is declared in the linker script
+extern unsigned char __heap_start;
 
 
 // inherits from MyLedMatrix
 // default constructor
 Pong::Pong(char qb, uint8_t h, uint8_t w, uint8_t l, uint8_t p, uint8_t t) : MyLedMatrix(h, w, l, p, t)
 {
+	uint16_t momentan_frei = SP - (uint16_t) &__heap_start;	
+	
   Serial.println("Pong->Constructor");
+  Serial.println(" ");
+  Serial.print("momentan_frei: "); Serial.println(momentan_frei);
+  
+  start = 4;
   m_width = w;
   m_height = h;
   Restart();
   DrawField();
   TimerSetup();
   
-  //ptr = &m_player[start];
+  ptr = &m_player[start];
 } 
 
 Pong::~Pong()
 {
   Serial.println("Pong->Destructor");
   TIMSK1 &= ~(1 << TOIE1);
-  cli();
 }
 
 
 
-
-
-int Pong::Game(){
-  
-  
+int Pong::Game()
+{ 
   char inChar = (char)Serial.read();  
     if(inChar == 'R')  // up
-     // start++;
+      start++;
     if(inChar == 'L')  // down
-     // start--;
+      start--;
     if(inChar == 'O') { // exit
       Serial.println("Pong->Quit");
       Restart();
       return 0;
     }
   
-  //*player_ptr = &m_player[start];
   for(int i=0; i<3; i++) {
-      //Adafruit_NeoPixel::setPixelColor(MyLedMatrix::SetXY(10, *player_ptr), RED);
-     // player_ptr++;
+      Adafruit_NeoPixel::setPixelColor(MyLedMatrix::SetXY(10, *ptr), RED);
+      ptr++;
    }  
    
-    Adafruit_NeoPixel::show();
+  Adafruit_NeoPixel::show();
     
     delay(1000);
 }
 
 void Pong::DrawField() {
-  m_field[2*m_width+2*m_height-4];
    for(uint8_t i=0; i<m_width; i++) {
     Adafruit_NeoPixel::setPixelColor(MyLedMatrix::SetXY(i, 0), WHITE);
     Adafruit_NeoPixel::setPixelColor(MyLedMatrix::SetXY(i, m_width-1), WHITE);

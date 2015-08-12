@@ -42,9 +42,12 @@ volatile uint8_t uart_timeout = 0;
 //   NEO_RGB     Pixels are wired for RGB bitstream (v1 FLORA pixels, not v2)
 //Adafruit_NeoPixel strip = Adafruit_NeoPixel(leds, pin, NEO_GRB + NEO_KHZ800);
 
-MyLedMatrix matrix = MyLedMatrix(height, width, leds, pin, NEO_GRB + NEO_KHZ800);
+
 
 void setup() {
+
+	MyLedMatrix *matrix = new MyLedMatrix(height, width, leds, pin, NEO_GRB + NEO_KHZ800);
+   
    pinMode(13, OUTPUT);
    
     // This is for Trinket 5V 16MHz, you can remove these three lines if you are not using a Trinket
@@ -52,21 +55,23 @@ void setup() {
     if (F_CPU == 16000000) clock_prescale_set(clock_div_1);
     #endif
     // End of trinket special code
-    matrix.begin();
-    matrix.show(); // Initialize all pixels to 'off'
+    matrix->begin();
+    matrix->show(); // Initialize all pixels to 'off'
     Serial.begin(19200);     
     //while(!Serial1);
-    Serial.println("Bereit"); 
+    Serial.println("--Bereit--"); 
     // reserve 200 bytes for the inputString:
     inputString.reserve(200);
   
   for(int i=0; i<10; i++) {
-    matrix.SetChar(i,155,0,0,5,0);
-    matrix.show();
+    matrix->SetChar(i,155,0,0,5,0);
+    matrix->show();
     delay(200);
-    matrix.ClearScreen();
-    matrix.show();
+    matrix->ClearScreen();
+    matrix->show();
   }
+  
+  delete matrix;
 }
 uint8_t n = 0;
 
@@ -80,8 +85,8 @@ void loop(){
     delete snake;   
   }
   if(inChar == 'D') {
-    Pong* pong = new Pong(quitButton, height, width, leds, pin, NEO_GRB + NEO_KHZ800);
-    while(pong->Game());
+	 Pong* pong = new Pong(quitButton, height, width, leds, pin, NEO_GRB + NEO_KHZ800);
+     while(pong->Game());
      delete pong;
   }
   if(inChar == '1') {
@@ -101,8 +106,8 @@ void loop(){
   }
  
 
-   matrix.ClearScreen();
-   matrix.show();
+  // matrix.ClearScreen();
+  // matrix.show();
    blink();
    
   
