@@ -22,7 +22,8 @@ public:
   int Game();
   void Restart();
   void DrawField();
-
+  void UpdateBall();
+  
 void TimerSetup();
 private:
   uint8_t m_move, m_height, m_width, m_enemy, m_ledVal;
@@ -32,6 +33,8 @@ private:
   uint8_t m_player[10] = {0,1,2,3,4,5,6,7,8,9};
   uint8_t *ptr;
   
+  uint8_t m_ballX;
+  uint8_t m_ballY;
   
 }; //Pong
 

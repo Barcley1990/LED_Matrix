@@ -28,11 +28,14 @@ Pong::Pong(char qb, uint8_t h, uint8_t w, uint8_t l, uint8_t p, uint8_t t) : MyL
   DrawField();
   TimerSetup();
   
-  ptr = &m_player[start];
+  m_ballX = 3;
+  m_ballY = 3;
 } 
 
 Pong::~Pong()
-{
+{	 
+  MyLedMatrix::ClearScreen();
+  MyLedMatrix::show();
   Serial.println("Pong->Destructor");
   TIMSK1 &= ~(1 << TOIE1);
 }
@@ -43,23 +46,24 @@ int Pong::Game()
 { 
   char inChar = (char)Serial.read();  
     if(inChar == 'R')  // up
-      start++;
-    if(inChar == 'L')  // down
       start--;
+    if(inChar == 'L')  // down
+      start++;
     if(inChar == 'O') { // exit
       Serial.println("Pong->Quit");
       Restart();
       return 0;
     }
-  
+  MyLedMatrix::ClearScreen();
+  DrawField();
+  ptr = &m_player[start];
   for(int i=0; i<3; i++) {
-      Adafruit_NeoPixel::setPixelColor(MyLedMatrix::SetXY(10, *ptr), RED);
+      Adafruit_NeoPixel::setPixelColor(MyLedMatrix::SetXY(m_width-1, *ptr), RED);
       ptr++;
-   }  
-   
+   }    
   Adafruit_NeoPixel::show();
     
-    delay(1000);
+  delay(500);
 }
 
 void Pong::DrawField() {
@@ -73,13 +77,14 @@ void Pong::DrawField() {
     Adafruit_NeoPixel::setPixelColor(MyLedMatrix::SetXY(5, i), WHITE);
     Adafruit_NeoPixel::setPixelColor(MyLedMatrix::SetXY(6, i), WHITE);
   }
-  // Set Player
-  for(int i=0; i<3; i++) {
-   // Adafruit_NeoPixel::setPixelColor(MyLedMatrix::SetXY(10, *ptr), RED);
-   // ptr++;
-  }
   Adafruit_NeoPixel::show();
 }
+
+void Pong::UpdateBall() {
+	Adafruit_NeoPixel::setPixelColor(MyLedMatrix::SetXY(m_ballX, m_ballY, BLUE);
+	
+}
+
 
 void Pong::Restart() {
   
@@ -122,6 +127,5 @@ ISR(TIMER1_OVF_vect)
 {
   TCNT1 = timer1_counter;   // preload timer
   
-  Serial.println("I was here");
-  //SpaceInvaders->Shot(void);
+  //Serial.println("I was here");
 }

@@ -104,10 +104,7 @@ void loop(){
      while(pixels->theaterChaseRainbow(20));
      delete pixels;
   }
- 
 
-  // matrix.ClearScreen();
-  // matrix.show();
    blink();
    
   
