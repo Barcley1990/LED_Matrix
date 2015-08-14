@@ -56,14 +56,20 @@ int Pong::Game()
     }
   MyLedMatrix::ClearScreen();
   DrawField();
+  UpdateBall();
+  
   ptr = &m_player[start];
+  if(start>6)
+    start = 6;
+  if(start<1)
+    start = 1;
   for(int i=0; i<3; i++) {
-      Adafruit_NeoPixel::setPixelColor(MyLedMatrix::SetXY(m_width-1, *ptr), RED);
+      Adafruit_NeoPixel::setPixelColor(MyLedMatrix::SetXY(m_width-2, *ptr), RED);
       ptr++;
    }    
   Adafruit_NeoPixel::show();
     
-  delay(500);
+  delay(100);
 }
 
 void Pong::DrawField() {
@@ -81,8 +87,13 @@ void Pong::DrawField() {
 }
 
 void Pong::UpdateBall() {
-	Adafruit_NeoPixel::setPixelColor(MyLedMatrix::SetXY(m_ballX, m_ballY, BLUE);
+	Adafruit_NeoPixel::setPixelColor(MyLedMatrix::SetXY(m_ballX, m_ballY), BLUE);
 	
+}
+
+void Pong::GameScore() {
+  uint8_t playerScore = 0;
+
 }
 
 

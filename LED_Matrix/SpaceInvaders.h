@@ -18,13 +18,14 @@ class SpaceInvaders : public MyLedMatrix
 {
 public:
   SpaceInvaders(char qb, uint8_t h, uint8_t w, uint8_t l, uint8_t p, uint8_t t=NEO_GRB + NEO_KHZ800);
+  ~SpaceInvaders();
   void Restart();
   int ReadSerial();
   void MoveInvaders();
   void MoveSpaceship();
   void Shot();
   int Game();
-  void TimerSetup();
+
   
 private:
   bool m_quit;
@@ -33,7 +34,8 @@ private:
   uint8_t m_fire;
   int8_t m_turn;
   uint8_t m_xStart, m_yStart;
-  uint8_t m_xAlt, m_xNeu;
+  uint8_t m_xOldSsPos;
+  uint8_t m_xSpaceShip, m_ySpaceShip;
   uint8_t m_bullets, m_bulletPos, m_shotPos;
 
 }; //SpaceInvaders

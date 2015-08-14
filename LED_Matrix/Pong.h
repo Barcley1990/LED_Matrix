@@ -23,6 +23,7 @@ public:
   void Restart();
   void DrawField();
   void UpdateBall();
+  void GameScore();
   
 void TimerSetup();
 private:

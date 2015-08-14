@@ -15,6 +15,7 @@
 #include "Pixels.h"
 #include "SpaceInvaders.h"
 #include "Pong.h"
+#include "Tetris.h"
 
 #define quitButton O
 char quitButton = 'O';
@@ -58,19 +59,43 @@ void setup() {
     matrix->begin();
     matrix->show(); // Initialize all pixels to 'off'
     Serial.begin(19200);     
-    //while(!Serial1);
+    while(!Serial);
     Serial.println("--Bereit--"); 
     // reserve 200 bytes for the inputString:
     inputString.reserve(200);
   
-  for(int i=0; i<10; i++) {
+/*  for(int i=0; i<10; i++) {
     matrix->SetChar(i,155,0,0,5,0);
     matrix->show();
     delay(200);
     matrix->ClearScreen();
     matrix->show();
   }
+ */ 
+
+/*   
+ int currentMatrix[10][12] = {
+      {0,0,0,0,0,0,0,0,0,0,0,0},
+      {1,1,1,1,1,1,1,1,1,1,1,1},
+      {0,0,0,0,0,0,0,0,0,0,0,0},
+      {1,1,1,1,1,1,1,1,1,1,1,1},
+      {0,0,0,0,0,0,0,0,0,0,0,0},
+      {1,1,1,1,1,1,1,1,1,1,1,1},
+      {0,0,0,0,0,0,0,0,0,0,0,0},
+      {1,1,1,1,1,1,1,1,1,1,1,1},
+      {0,0,0,0,0,0,0,0,0,0,0,0},
+      {1,1,1,1,1,1,1,1,1,1,1,1},
+  };
   
+  for(int i=0; i<12; i++) {
+    for(int j=0; j<10; j++)  {
+      if(currentMatrix[j][i] != 0) 
+       matrix->setPixelColor(matrix->SetXY(i,j), RED);
+    }
+  }
+  
+  matrix->show();
+ */
   delete matrix;
 }
 uint8_t n = 0;
@@ -89,7 +114,17 @@ void loop(){
      while(pong->Game());
      delete pong;
   }
-  if(inChar == '1') {
+  if(inChar == 'S') {
+	 SpaceInvaders* spaceinvaders = new SpaceInvaders(quitButton, height, width, leds, pin, NEO_GRB + NEO_KHZ800);
+     while(spaceinvaders->Game());
+     delete spaceinvaders;
+  }
+/*  if(inChar == 'O') {
+     Tetris* tetris = new Tetris(quitButton, height, width, leds, pin, NEO_GRB + NEO_KHZ800);
+     while(tetris->Game());
+     delete tetris;
+  }
+*/  if(inChar == '1') {
      Pixels* pixels = new Pixels(quitButton, height, width, leds, pin, NEO_GRB + NEO_KHZ800);
      while(pixels->Rainbow(20));
      delete pixels;
