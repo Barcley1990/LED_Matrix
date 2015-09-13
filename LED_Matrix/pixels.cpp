@@ -40,7 +40,7 @@ int Pixels::Rainbow(uint8_t wait)
   uint16_t i, j;
   for(j=0; j<256*5; j++) { // 5 cycles of all colors on wheel
     for(i=0; i< MyLedMatrix::numPixels(); i++) {
-      if( (char)Serial.read() == 'O') {        
+      if( (char)Serial1.read() == 'O') {        
         return 0;
         break;    
       }
@@ -57,7 +57,7 @@ int Pixels::colorWipe(uint32_t c, uint8_t wait)
 {
   for(uint16_t i=0; i<MyLedMatrix::numPixels(); i++) {
     
-    if( (char)Serial.read() == 'O') {        
+    if( (char)Serial1.read() == 'O') {        
         return 0;
         break;    
       }
@@ -73,7 +73,7 @@ int Pixels::rainbowCycle(uint8_t wait) {
 
   for(j=0; j<256*5; j++) { // 5 cycles of all colors on wheel
     for(i=0; i< MyLedMatrix::numPixels(); i++) {
-      if( (char)Serial.read() == 'O') {        
+      if( (char)Serial1.read() == 'O') {        
         return 0;
         break;    
       }
@@ -89,7 +89,7 @@ int Pixels::theaterChaseRainbow(uint8_t wait) {
   for (int j=0; j < 256; j++) {     // cycle all 256 colors in the wheel
     for (int q=0; q < 3; q++) {
         for (int i=0; i < MyLedMatrix::numPixels(); i=i+3) {
-          if( (char)Serial.read() == 'O') {        
+          if( (char)Serial1.read() == 'O') {        
           return 0;
           break;    
       }

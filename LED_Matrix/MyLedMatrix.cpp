@@ -12,7 +12,7 @@
 // default constructor
 MyLedMatrix::MyLedMatrix(uint8_t h, uint8_t w, uint8_t l, uint8_t p, uint8_t t) : Adafruit_NeoPixel(l, p, t)
 {
-  Serial.println("MyLedMatrix->Constructor");
+  Serial1.println("MyLedMatrix->Constructor");
 	m_height = h;
 	m_width = w;
 	m_maxleds = m_height*m_width;
@@ -20,7 +20,7 @@ MyLedMatrix::MyLedMatrix(uint8_t h, uint8_t w, uint8_t l, uint8_t p, uint8_t t) 
 
 MyLedMatrix::~MyLedMatrix()
 {
-  Serial.println("MyLedMatrix->Destructor");
+  Serial1.println("MyLedMatrix->Destructor");
 }
 
 void MyLedMatrix::FillScreen(uint8_t r, uint8_t g, uint8_t b)
@@ -120,15 +120,15 @@ void MyLedMatrix::MoveRight(uint8_t steps)
 	for (uint8_t i=0; i<m_maxleds; i++)
 	{		
 		// for debugging purpose only
-		Serial.print("pixels: ");
-		Serial.println(*pixels);
-		Serial.print("Position: ");
-		Serial.println(position);
+		Serial1.print("pixels: ");
+		Serial1.println(*pixels);
+		Serial1.print("Position: ");
+		Serial1.println(position);
 		position = *pixels;
 	
 		uint8_t color = Adafruit_NeoPixel::getPixelColor(position);		
-		Serial.print("Color: ");
-		Serial.println(color);
+		Serial1.print("Color: ");
+		Serial1.println(color);
 		
 		Adafruit_NeoPixel::resetPixel(position);	
 		GetXY(position, &shiftedX, &shiftedY);

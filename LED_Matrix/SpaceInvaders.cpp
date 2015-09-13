@@ -23,7 +23,7 @@ struct bullet{
 // default constructor
 SpaceInvaders::SpaceInvaders(char qb, uint8_t h, uint8_t w, uint8_t l, uint8_t p, uint8_t t) : MyLedMatrix(h, w, l, p, t)
 {
-  Serial.println("SpaceInvaders->Constructor");
+  Serial1.println("SpaceInvaders->Constructor");
   m_xSpaceShip  = 6;
   m_ySpaceShip = 9;
   ship.x = 6;
@@ -89,7 +89,7 @@ void SpaceInvaders::Shot(){
 int SpaceInvaders::Game()
 { 
   MyLedMatrix::ClearScreen();
-  char inChar = (char)Serial.read();  
+  char inChar = (char)Serial1.read();  
       if(inChar == 'R') { // rigth
         if(ship.x < 11)
             ship.x++;
@@ -101,7 +101,7 @@ int SpaceInvaders::Game()
       if(inChar == 'X')  // fire
         ship.shoot = true;
       if(inChar == 'O') { // exit
-        Serial.println("SpaceInvaders->Quit");
+        Serial1.println("SpaceInvaders->Quit");
         Restart();
         return 0;
       }  

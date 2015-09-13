@@ -17,9 +17,9 @@ Pong::Pong(char qb, uint8_t h, uint8_t w, uint8_t l, uint8_t p, uint8_t t) : MyL
 {
   uint16_t momentan_frei = SP - (uint16_t) &__heap_start;	
 	
-  Serial.println("Pong->Constructor");
-  Serial.println(" ");
-  Serial.print("momentan_frei: "); Serial.println(momentan_frei);
+  Serial1.println("Pong->Constructor");
+  Serial1.println(" ");
+  Serial1.print("momentan_frei: "); Serial1.println(momentan_frei);
   //uint8_t m_player[10] = {0,1,2,3,4,5,6,7,8,9};
 
   start = 4;
@@ -45,13 +45,13 @@ Pong::~Pong()
 
 int Pong::Game()
 { 
-  char inChar = (char)Serial.read();  
+  char inChar = (char)Serial1.read();  
     if(inChar == 'R')  // up
       start--;
     if(inChar == 'L')  // down
       start++;
     if(inChar == 'O') { // exit
-      Serial.println("Pong->Quit");
+      Serial1.println("Pong->Quit");
       Restart();
       return 0;
     }

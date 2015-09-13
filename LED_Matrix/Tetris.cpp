@@ -9,7 +9,7 @@
 
 Tetris::Tetris(char qb, uint8_t h, uint8_t w, uint8_t l, uint8_t p, uint8_t t) : MyLedMatrix(h, w, l, p, t)
 {
-  Serial.println("Tetris->Constructor");
+  Serial1.println("Tetris->Constructor");
   
   //  random seed for color selection, direction selection, and food+snakehead generation  
   //randomSeed(analogRead(A0));
@@ -28,7 +28,7 @@ Tetris::Tetris(char qb, uint8_t h, uint8_t w, uint8_t l, uint8_t p, uint8_t t) :
 }
 
 Tetris::~Tetris() {
-  Serial.println("Tetris->Destructor");
+  Serial1.println("Tetris->Destructor");
 }
 
 void Tetris::clearTrace() {
@@ -159,9 +159,9 @@ void Tetris::checkLinesCleared() {
 
 //  All Interrupt Functions Go Under Here
 void Tetris::pauseGame() {
-  Serial.println("Tetris->Pause Game");
+  Serial1.println("Tetris->Pause Game");
   delay(5);
-  if ((char)Serial.read() == 'D') {
+  if ((char)Serial1.read() == 'D') {
     gameRunning = !gameRunning;
     //if (gameRunning) {digitalWrite(pauseMusic,LOW);}
     //else digitalWrite(pauseMusic,HIGH);
@@ -169,9 +169,9 @@ void Tetris::pauseGame() {
 }
 
 void Tetris::restartGame() {
-  Serial.println("Tetris->Restart Game");
+  Serial1.println("Tetris->Restart Game");
   delay(5);
-  if ((char)Serial.read() == 'O') {  //reinitialize all variables
+  if ((char)Serial1.read() == 'O') {  //reinitialize all variables
     for (int i=0;i<cols;i++) {
       for (int j=0; j<rows; j++) currentMatrix[j][i]=0;
     }
@@ -197,8 +197,8 @@ unsigned long time= millis();
 void Tetris::checkUp() {
   time= millis();
   delay(1);
-  if ((char)Serial.read() == 'F' && time-lastButtonPressTime>110 && disableMove==false && gameRunning==true) {
-    Serial.println("Tetris->up");
+  if ((char)Serial1.read() == 'F' && time-lastButtonPressTime>110 && disableMove==false && gameRunning==true) {
+    Serial1.println("Tetris->up");
     rotate();
     lastButtonPressTime=millis();
   }
@@ -206,8 +206,8 @@ void Tetris::checkUp() {
 
 void Tetris::startDropping() {
   time = millis();
-  if ((char)Serial.read() == 'B' && time-lastButtonPressTime>110 && disableMove==false && gameRunning==true) {
-    Serial.println("Tetris->sd");
+  if ((char)Serial1.read() == 'B' && time-lastButtonPressTime>110 && disableMove==false && gameRunning==true) {
+    Serial1.println("Tetris->sd");
     pieceDropping=true;
     lastButtonPressTime=millis();
   }
@@ -226,8 +226,8 @@ void Tetris::checkLeft()  {
 void Tetris::checkRight() {  
   time= millis();
   delay(1);
-  if ((char)Serial.read() == 'R' && time-lastButtonPressTime>110 && disableMove==false && gameRunning==true) {
-    Serial.println("Tetris->right");
+  if ((char)Serial1.read() == 'R' && time-lastButtonPressTime>110 && disableMove==false && gameRunning==true) {
+    Serial1.println("Tetris->right");
     move(4);
     lastButtonPressTime=millis();
   }
@@ -236,8 +236,8 @@ void Tetris::checkRight() {
 void Tetris::checkDrop() {  
   time= millis();
   delay(1);
-  if ((char)Serial.read() == 'X' && time-lastButtonPressTime>110 && disableMove==false && gameRunning==true) {
-    Serial.println("Tetris->drop");
+  if ((char)Serial1.read() == 'X' && time-lastButtonPressTime>110 && disableMove==false && gameRunning==true) {
+    Serial1.println("Tetris->drop");
     fastDrop=true;
     lastButtonPressTime=millis();
   }
@@ -253,8 +253,8 @@ unsigned long currentLandedTime=millis();
    
 int Tetris::Game() {
  // Serial.println("Tetris->washere");
-  if ((char)Serial.read() == 'O') {
-    Serial.println("Tetris->Quit");
+  if ((char)Serial1.read() == 'O') {
+    Serial1.println("Tetris->Quit");
     return 0;
   }
   checkUp();
@@ -279,7 +279,7 @@ int Tetris::Game() {
       displayFrame();
       fastDrop=false;
     }
-    if ((char)Serial.read() == 'B') pieceDropping=false;
+    if ((char)Serial1.read() == 'B') pieceDropping=false;
     int timeInterval;
     if (!pieceDropping) timeInterval = 800-numberOfLinesCleared*10;
     else timeInterval= 120;
@@ -298,7 +298,7 @@ int Tetris::Game() {
         disableMove = true;
         convertToDeadBlock();
         checkLinesCleared();
-        Serial.println("Tetris->generatePiece");
+        Serial1.println("Tetris->generatePiece");
         if (generatePiece()==false) {
           gameOverFunc();
           //displayTextOverlay(0);
@@ -313,7 +313,7 @@ int Tetris::Game() {
 
 
 void Tetris::gameOverFunc() {
-  Serial.println("Tetris->Game Over");
+  Serial1.println("Tetris->Game Over");
   gameRunning = false;
   gameOver =true;
   //digitalWrite(restartMusic,HIGH);

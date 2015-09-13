@@ -58,9 +58,9 @@ void setup() {
     // End of trinket special code
     matrix->begin();
     matrix->show(); // Initialize all pixels to 'off'
-    Serial.begin(19200);     
+    Serial1.begin(19200);     
     while(!Serial);
-    Serial.println("--Bereit--"); 
+    Serial1.println("--Bereit--"); 
     // reserve 200 bytes for the inputString:
     inputString.reserve(200);
   
@@ -103,7 +103,7 @@ uint8_t n = 0;
 
 void loop(){
   
-  char inChar = (char)Serial.read(); 
+  char inChar = (char)Serial1.read(); 
   if(inChar == 'X') {
     Snake* snake = new Snake(quitButton, height, width, leds, pin, NEO_GRB + NEO_KHZ800);
     while(snake->Game(200));
