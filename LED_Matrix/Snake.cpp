@@ -19,6 +19,8 @@ Snake::Snake(char qb, uint8_t h, uint8_t w, uint8_t l, uint8_t p, uint8_t t) : M
   Serial.println(" ");
   char m_quitButton = 'O';
   m_init = false;
+  ledVal = 0;
+  pOld = snakeOld;
   
    m_gameCounter = 0;
    m_snakeX = 0;
@@ -52,7 +54,7 @@ void Snake::Restart()
 }
 
 
-int Snake::Game(uint8_t wait) 
+int Snake::Game(int wait) 
 {
   if(m_init = false) 
     Restart();    

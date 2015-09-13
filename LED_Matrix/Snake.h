@@ -20,13 +20,14 @@ public:
   ~Snake();
   void Restart();
   void Move();
-  int Game(uint8_t wait);
+  int Game(int wait);
   void PlaceFood();
   void GameCounter();
   
   uint8_t snakeOld[120];
-  uint8_t *pOld = snakeOld;
-  int ledVal = 0;
+  //uint8_t *pOld = snakeOld;
+  uint8_t *pOld;
+  int ledVal;
 
 private:
   uint8_t m_snakeX;

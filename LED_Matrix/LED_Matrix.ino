@@ -103,28 +103,28 @@ uint8_t n = 0;
 
 void loop(){
   
-  char inChar = (char)Serial.read();
+  char inChar = (char)Serial.read(); 
   if(inChar == 'X') {
     Snake* snake = new Snake(quitButton, height, width, leds, pin, NEO_GRB + NEO_KHZ800);
-    while(snake->Game(1000));
+    while(snake->Game(200));
     delete snake;   
-  }
+  }/*
   if(inChar == 'D') {
-	 Pong* pong = new Pong(quitButton, height, width, leds, pin, NEO_GRB + NEO_KHZ800);
+     Pong* pong = new Pong(quitButton, height, width, leds, pin, NEO_GRB + NEO_KHZ800);
      while(pong->Game());
      delete pong;
-  }
+  }*//*
   if(inChar == 'S') {
-	 SpaceInvaders* spaceinvaders = new SpaceInvaders(quitButton, height, width, leds, pin, NEO_GRB + NEO_KHZ800);
+     SpaceInvaders* spaceinvaders = new SpaceInvaders(quitButton, height, width, leds, pin, NEO_GRB + NEO_KHZ800);
      while(spaceinvaders->Game());
      delete spaceinvaders;
-  }
-/*  if(inChar == 'O') {
+  }*/
+  /*if(inChar == 'O') {
      Tetris* tetris = new Tetris(quitButton, height, width, leds, pin, NEO_GRB + NEO_KHZ800);
      while(tetris->Game());
      delete tetris;
-  }
-*/  if(inChar == '1') {
+  }*/
+  if(inChar == '1') {
      Pixels* pixels = new Pixels(quitButton, height, width, leds, pin, NEO_GRB + NEO_KHZ800);
      while(pixels->Rainbow(20));
      delete pixels;

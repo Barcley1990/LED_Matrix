@@ -37,6 +37,15 @@ private:
   uint8_t m_xOldSsPos;
   uint8_t m_xSpaceShip, m_ySpaceShip;
   uint8_t m_bullets, m_bulletPos, m_shotPos;
+  
+   //  Matrix Definition
+  #define cols         12
+  #define rows         10
+  #define leftLimit    0
+  #define rightLimit   11
+  #define topLimit     0
+  #define bottomLimit  9
+  int currentMatrix[rows][cols];
 
 }; //SpaceInvaders
 
