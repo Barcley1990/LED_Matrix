@@ -6,7 +6,10 @@
 */
 
 #include "Pixels.h"
+#include "MyLedMatrix.h"
 #include "math.h"
+
+
 
 #define BRIGHTNESS 64
 
@@ -35,28 +38,38 @@ uint32_t Pixels::Wheel(byte WheelPos)
   }
 }
 
-int Pixels::Rainbow(uint8_t wait) 
+uint8_t cnt = 0;
+int Pixels::Rainbow(uint8_t wait, uint8_t rerun) 
 {
-  uint16_t i, j;
-  for(j=0; j<256*5; j++) { // 5 cycles of all colors on wheel
-    for(i=0; i< MyLedMatrix::numPixels(); i++) {
-      if( (char)Serial1.read() == 'O') {        
-        return 0;
-        break;    
-      }
-      MyLedMatrix::setPixelColor(i, Wheel(((i * 256 / MyLedMatrix::numPixels()) + j) & 255));
-    }
-    MyLedMatrix::show();
-    delay(wait);
+  if(cnt == rerun) {
+    cnt = 0;
+    return 0;
+    //break;
   }
-  return 1;
+    uint16_t i, j;
+    for(j=0; j<256; j++) { // 1 cycle of all colors on wheel
+      for(i=0; i< MyLedMatrix::numPixels(); i++) {
+        if( (char)Serial1.read() == 'O') {        
+          return 0;
+          break;    
+        }
+        MyLedMatrix::setPixelColor(i, Wheel(((i * 256 / MyLedMatrix::numPixels()) + j) & 255));
+      }
+      MyLedMatrix::show();
+      delay(wait);
+    }   
+    cnt++;
 }
 
 // Fill the dots one after the other with a color
-int Pixels::colorWipe(uint32_t c, uint8_t wait) 
+int Pixels::colorWipe(uint32_t c, uint8_t wait, uint8_t rerun) 
 {
-  for(uint16_t i=0; i<MyLedMatrix::numPixels(); i++) {
-    
+  if(cnt == rerun) {
+    cnt = 0;
+    return 0;
+    //break;
+  }
+  for(uint16_t i=0; i<MyLedMatrix::numPixels(); i++) {   
     if( (char)Serial1.read() == 'O') {        
         return 0;
         break;    
@@ -65,13 +78,19 @@ int Pixels::colorWipe(uint32_t c, uint8_t wait)
       MyLedMatrix::show();
       delay(wait);
   }
+  cnt++;
 }
 
 // Slightly different, this makes the rainbow equally distributed throughout
-int Pixels::rainbowCycle(uint8_t wait) {
+int Pixels::rainbowCycle(uint8_t wait, uint8_t rerun) {
+  if(cnt == rerun) {
+    cnt = 0;
+    return 0;
+    //break;
+  }
   uint16_t i, j;
 
-  for(j=0; j<256*5; j++) { // 5 cycles of all colors on wheel
+  for(j=0; j<256; j++) { // 1 cycle of all colors on wheel
     for(i=0; i< MyLedMatrix::numPixels(); i++) {
       if( (char)Serial1.read() == 'O') {        
         return 0;
@@ -82,33 +101,34 @@ int Pixels::rainbowCycle(uint8_t wait) {
     MyLedMatrix::show();
     delay(wait);
   }
+  cnt++;
 }
 
 //Theatre-style crawling lights with rainbow effect
-int Pixels::theaterChaseRainbow(uint8_t wait) {
+int Pixels::theaterChaseRainbow(uint8_t wait, uint8_t rerun) {
+  if(cnt == rerun) {
+    cnt = 0;
+    return 0;
+    //break;
+  }
   for (int j=0; j < 256; j++) {     // cycle all 256 colors in the wheel
     for (int q=0; q < 3; q++) {
         for (int i=0; i < MyLedMatrix::numPixels(); i=i+3) {
           if( (char)Serial1.read() == 'O') {        
           return 0;
           break;    
-      }
-          MyLedMatrix::setPixelColor(i+q, Wheel( (i+j) % 255));    //turn every third pixel on
+          }
+        MyLedMatrix::setPixelColor(i+q, Wheel( (i+j) % 255));    //turn every third pixel on
         }
-        MyLedMatrix::show();
-       
-        delay(wait);
-       
+        MyLedMatrix::show();       
+        delay(wait);       
         for (int i=0; i < MyLedMatrix::numPixels(); i=i+3) {
           MyLedMatrix::setPixelColor(i+q, 0);        //turn every third pixel off
         }
     }
   }
+  cnt++;
 }
-
-
-
-
 
 
 

@@ -18,10 +18,11 @@ class Pixels : public MyLedMatrix
 public:
   Pixels(char qb, uint8_t h, uint8_t w, uint8_t l, uint8_t p, uint8_t t=NEO_GRB + NEO_KHZ800);
   uint32_t Wheel(byte WheelPos);
-  int Rainbow(uint8_t wait);  
-  int colorWipe(uint32_t c, uint8_t wait);
-  int rainbowCycle(uint8_t wait);
-  int theaterChaseRainbow(uint8_t wait);
+  int Rainbow(uint8_t wait, uint8_t rerun = 1);  
+  int colorWipe(uint32_t c, uint8_t wait, uint8_t rerun = 1);
+  int rainbowCycle(uint8_t wait, uint8_t rerun = 1);
+  int theaterChaseRainbow(uint8_t wait, uint8_t rerun = 1);
+
 
 private:
   uint8_t m_height;

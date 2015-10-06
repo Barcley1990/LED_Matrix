@@ -10,11 +10,15 @@
 
 #ifndef __MYLEDMATRIX_H__
 #define __MYLEDMATRIX_H__
-
+// RED - GREEN - BLUE
 #define RED     Adafruit_NeoPixel::Color(255, 0, 0)
-#define BLUE	Adafruit_NeoPixel::Color(0, 255, 0)
-#define GREEN	Adafruit_NeoPixel::Color(0, 0, 255)
-#define WHITE	Adafruit_NeoPixel::Color(255, 255, 255)
+#define GREEN	Adafruit_NeoPixel::Color(0, 255, 0)
+#define BLUE	Adafruit_NeoPixel::Color(0, 0, 255)
+#define LIGHTBLUE  Adafruit_NeoPixel::Color(0, 155, 155)
+#define PINK	Adafruit_NeoPixel::Color(155, 0, 255)
+#define YELLOW	Adafruit_NeoPixel::Color(155, 155, 0)
+#define ORANGE	Adafruit_NeoPixel::Color(200, 80, 0)
+#define WHITE	Adafruit_NeoPixel::Color(200, 255, 255)
 
 class MyLedMatrix : public Adafruit_NeoPixel
 {

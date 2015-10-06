@@ -13,9 +13,7 @@
 #include "MyLedMatrix.h"
 #include "Snake.h"
 #include "Pixels.h"
-#include "SpaceInvaders.h"
-#include "Pong.h"
-#include "Tetris.h"
+
 
 #define quitButton O
 char quitButton = 'O';
@@ -24,7 +22,7 @@ char quitButton = 'O';
 
 uint8_t height = 10;
 uint8_t width = 12;
-uint8_t pin = 5;
+uint8_t pin = 4;
 uint8_t leds = 120;
 
 String inputString = "";         // a string to hold incoming data
@@ -47,7 +45,7 @@ volatile uint8_t uart_timeout = 0;
 
 void setup() {
 
-	MyLedMatrix *matrix = new MyLedMatrix(height, width, leds, pin, NEO_GRB + NEO_KHZ800);
+  MyLedMatrix *matrix = new MyLedMatrix(height, width, leds, pin, NEO_GRB + NEO_KHZ800);
    
    pinMode(13, OUTPUT);
    
@@ -58,47 +56,83 @@ void setup() {
     // End of trinket special code
     matrix->begin();
     matrix->show(); // Initialize all pixels to 'off'
+    
     Serial1.begin(19200);     
-    while(!Serial);
+    Serial.begin(19200);
+    Serial.println("--Bereit--");
     Serial1.println("--Bereit--"); 
     // reserve 200 bytes for the inputString:
     inputString.reserve(200);
-  
-/*  for(int i=0; i<10; i++) {
-    matrix->SetChar(i,155,0,0,5,0);
-    matrix->show();
-    delay(200);
-    matrix->ClearScreen();
-    matrix->show();
-  }
- */ 
-
-/*   
- int currentMatrix[10][12] = {
-      {0,0,0,0,0,0,0,0,0,0,0,0},
-      {1,1,1,1,1,1,1,1,1,1,1,1},
-      {0,0,0,0,0,0,0,0,0,0,0,0},
-      {1,1,1,1,1,1,1,1,1,1,1,1},
-      {0,0,0,0,0,0,0,0,0,0,0,0},
-      {1,1,1,1,1,1,1,1,1,1,1,1},
-      {0,0,0,0,0,0,0,0,0,0,0,0},
-      {1,1,1,1,1,1,1,1,1,1,1,1},
-      {0,0,0,0,0,0,0,0,0,0,0,0},
-      {1,1,1,1,1,1,1,1,1,1,1,1},
+ /*
+   char helloWorld[10][53] = {
+      {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
+      {1,0,0,1,0,2,2,2,2,0,3,0,0,0,0,4,0,0,0,0,2,2,2,2,0,0,0,0,1,0,0,0,1,0,2,2,2,2,0,5,5,5,5,0,4,0,0,0,0,2,2,2,0},
+      {1,0,0,1,0,2,0,0,0,0,3,0,0,0,0,4,0,0,0,0,2,0,0,2,0,0,0,0,1,0,0,0,1,0,2,0,0,2,0,5,0,0,5,0,4,0,0,0,0,2,0,0,2},
+      {1,1,1,1,0,2,2,2,2,0,3,0,0,0,0,4,0,0,0,0,2,0,0,2,0,0,0,0,1,0,0,0,1,0,2,0,0,2,0,5,5,5,5,0,4,0,0,0,0,2,0,0,2},
+      {1,0,0,1,0,2,0,0,0,0,3,0,0,0,0,4,0,0,0,0,2,0,0,2,0,0,0,0,1,0,1,0,1,0,2,0,0,2,0,5,0,5,0,0,4,0,0,0,0,2,0,0,2},
+      {1,0,0,1,0,2,2,2,2,0,3,3,3,3,0,4,4,4,4,0,2,2,2,2,0,0,0,0,0,1,0,1,0,0,2,2,2,2,0,5,0,0,5,0,4,4,4,4,0,2,2,2,0},
+      {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
+      {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
+      {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
+      {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
   };
-  
-  for(int i=0; i<12; i++) {
-    for(int j=0; j<10; j++)  {
-      if(currentMatrix[j][i] != 0) 
-       matrix->setPixelColor(matrix->SetXY(i,j), RED);
+ for(int shift=-53; shift<53;shift++){ 
+    for(int i=0; i<53; i++) {
+      for(int j=0; j<10; j++)  {
+         if(helloWorld[j][i] == 1) 
+         matrix->setPixelColor(matrix->SetXY(i-shift,j), RED);
+         if(helloWorld[j][i] == 2) 
+         matrix->setPixelColor(matrix->SetXY(i-shift,j), GREEN);
+         if(helloWorld[j][i] == 3) 
+         matrix->setPixelColor(matrix->SetXY(i-shift,j), BLUE);
+         if(helloWorld[j][i] == 4) 
+         matrix->setPixelColor(matrix->SetXY(i-shift,j), WHITE);
+         if(helloWorld[j][i] == 5) 
+         matrix->setPixelColor(matrix->SetXY(i-shift,j), PINK);
+      }
     }
-  }
-  
   matrix->show();
+  delay(200);
+  matrix->ClearScreen();
+ } 
+  char melie[10][15] = {
+      {2,2,0,2,2,3,3,3,4,0,0,5,3,3,3},
+      {2,0,2,0,2,3,0,0,4,0,0,5,3,0,0},
+      {2,0,0,0,2,3,3,3,4,0,0,5,3,3,3},
+      {2,0,0,0,2,3,0,0,4,0,0,5,3,0,0},
+      {2,0,0,0,2,3,3,3,4,4,4,5,3,3,3},
+      {0,0,0,1,1,0,1,1,0,0,0,0,0,0,0},
+      {0,0,1,0,0,1,0,0,1,0,0,0,0,0,0},
+      {0,0,0,1,0,0,0,1,0,0,0,0,0,0,0},
+      {0,0,0,0,1,0,1,0,0,0,0,0,0,0,0},
+      {0,0,0,0,0,1,0,0,0,0,0,0,0,0,0},
+  };
+  for(int shift=-15; shift<12;shift++){ 
+    for(int i=0; i<15; i++) {
+      for(int j=0; j<10; j++)  {
+         if(melie[j][i] == 1) 
+         matrix->setPixelColor(matrix->SetXY(i-shift,j), RED);
+         if(melie[j][i] == 2) 
+         matrix->setPixelColor(matrix->SetXY(i-shift,j), GREEN);
+         if(melie[j][i] == 3) 
+         matrix->setPixelColor(matrix->SetXY(i-shift,j), BLUE);
+         if(melie[j][i] == 4) 
+         matrix->setPixelColor(matrix->SetXY(i-shift,j), WHITE);
+         if(melie[j][i] == 5) 
+         matrix->setPixelColor(matrix->SetXY(i-shift,j), PINK);
+      }
+    }
+  matrix->show();
+  delay(200);
+  matrix->ClearScreen();
+ } 
  */
   delete matrix;
+  matrix->show();
+
 }
-uint8_t n = 0;
+// end setup
+
 
 
 void loop(){
@@ -108,37 +142,13 @@ void loop(){
     Snake* snake = new Snake(quitButton, height, width, leds, pin, NEO_GRB + NEO_KHZ800);
     while(snake->Game(200));
     delete snake;   
-  }/*
-  if(inChar == 'D') {
-     Pong* pong = new Pong(quitButton, height, width, leds, pin, NEO_GRB + NEO_KHZ800);
-     while(pong->Game());
-     delete pong;
-  }*//*
-  if(inChar == 'S') {
-     SpaceInvaders* spaceinvaders = new SpaceInvaders(quitButton, height, width, leds, pin, NEO_GRB + NEO_KHZ800);
-     while(spaceinvaders->Game());
-     delete spaceinvaders;
-  }*/
-  /*if(inChar == 'O') {
-     Tetris* tetris = new Tetris(quitButton, height, width, leds, pin, NEO_GRB + NEO_KHZ800);
-     while(tetris->Game());
-     delete tetris;
-  }*/
-  if(inChar == '1') {
-     Pixels* pixels = new Pixels(quitButton, height, width, leds, pin, NEO_GRB + NEO_KHZ800);
-     while(pixels->Rainbow(20));
-     delete pixels;
-  }
-   if(inChar == '2') {
-     Pixels* pixels = new Pixels(quitButton, height, width, leds, pin, NEO_GRB + NEO_KHZ800);
-     while(pixels->colorWipe(20, BLUE));
-     delete pixels;
-  }
-   if(inChar == '3') {
-     Pixels* pixels = new Pixels(quitButton, height, width, leds, pin, NEO_GRB + NEO_KHZ800);
-     while(pixels->theaterChaseRainbow(20));
-     delete pixels;
-  }
+   }
+   Pixels* pixels = new Pixels(quitButton, height, width, leds, pin, NEO_GRB + NEO_KHZ800);
+   while(pixels->Rainbow(20, 10));
+   while(pixels->colorWipe(BLUE, 10));
+   while(pixels->theaterChaseRainbow(20));
+   delete pixels;
+  
 
    blink();
    
