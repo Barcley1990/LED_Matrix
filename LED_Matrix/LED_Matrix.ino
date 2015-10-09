@@ -42,10 +42,9 @@ volatile uint8_t uart_timeout = 0;
 //Adafruit_NeoPixel strip = Adafruit_NeoPixel(leds, pin, NEO_GRB + NEO_KHZ800);
 
 
-
 void setup() {
 
-  MyLedMatrix *matrix = new MyLedMatrix(height, width, leds, pin, NEO_GRB + NEO_KHZ800);
+   MyLedMatrix *matrix = new MyLedMatrix(height, width, leds, pin, NEO_GRB + NEO_KHZ800);
    
    pinMode(13, OUTPUT);
    
@@ -63,89 +62,54 @@ void setup() {
     Serial1.println("--Bereit--"); 
     // reserve 200 bytes for the inputString:
     inputString.reserve(200);
- /*
-   char helloWorld[10][53] = {
-      {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
-      {1,0,0,1,0,2,2,2,2,0,3,0,0,0,0,4,0,0,0,0,2,2,2,2,0,0,0,0,1,0,0,0,1,0,2,2,2,2,0,5,5,5,5,0,4,0,0,0,0,2,2,2,0},
-      {1,0,0,1,0,2,0,0,0,0,3,0,0,0,0,4,0,0,0,0,2,0,0,2,0,0,0,0,1,0,0,0,1,0,2,0,0,2,0,5,0,0,5,0,4,0,0,0,0,2,0,0,2},
-      {1,1,1,1,0,2,2,2,2,0,3,0,0,0,0,4,0,0,0,0,2,0,0,2,0,0,0,0,1,0,0,0,1,0,2,0,0,2,0,5,5,5,5,0,4,0,0,0,0,2,0,0,2},
-      {1,0,0,1,0,2,0,0,0,0,3,0,0,0,0,4,0,0,0,0,2,0,0,2,0,0,0,0,1,0,1,0,1,0,2,0,0,2,0,5,0,5,0,0,4,0,0,0,0,2,0,0,2},
-      {1,0,0,1,0,2,2,2,2,0,3,3,3,3,0,4,4,4,4,0,2,2,2,2,0,0,0,0,0,1,0,1,0,0,2,2,2,2,0,5,0,0,5,0,4,4,4,4,0,2,2,2,0},
-      {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
-      {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
-      {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
-      {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
-  };
- for(int shift=-53; shift<53;shift++){ 
-    for(int i=0; i<53; i++) {
-      for(int j=0; j<10; j++)  {
-         if(helloWorld[j][i] == 1) 
-         matrix->setPixelColor(matrix->SetXY(i-shift,j), RED);
-         if(helloWorld[j][i] == 2) 
-         matrix->setPixelColor(matrix->SetXY(i-shift,j), GREEN);
-         if(helloWorld[j][i] == 3) 
-         matrix->setPixelColor(matrix->SetXY(i-shift,j), BLUE);
-         if(helloWorld[j][i] == 4) 
-         matrix->setPixelColor(matrix->SetXY(i-shift,j), WHITE);
-         if(helloWorld[j][i] == 5) 
-         matrix->setPixelColor(matrix->SetXY(i-shift,j), PINK);
-      }
-    }
-  matrix->show();
-  delay(200);
-  matrix->ClearScreen();
- } 
-  char melie[10][15] = {
-      {2,2,0,2,2,3,3,3,4,0,0,5,3,3,3},
-      {2,0,2,0,2,3,0,0,4,0,0,5,3,0,0},
-      {2,0,0,0,2,3,3,3,4,0,0,5,3,3,3},
-      {2,0,0,0,2,3,0,0,4,0,0,5,3,0,0},
-      {2,0,0,0,2,3,3,3,4,4,4,5,3,3,3},
-      {0,0,0,1,1,0,1,1,0,0,0,0,0,0,0},
-      {0,0,1,0,0,1,0,0,1,0,0,0,0,0,0},
-      {0,0,0,1,0,0,0,1,0,0,0,0,0,0,0},
-      {0,0,0,0,1,0,1,0,0,0,0,0,0,0,0},
-      {0,0,0,0,0,1,0,0,0,0,0,0,0,0,0},
-  };
-  for(int shift=-15; shift<12;shift++){ 
-    for(int i=0; i<15; i++) {
-      for(int j=0; j<10; j++)  {
-         if(melie[j][i] == 1) 
-         matrix->setPixelColor(matrix->SetXY(i-shift,j), RED);
-         if(melie[j][i] == 2) 
-         matrix->setPixelColor(matrix->SetXY(i-shift,j), GREEN);
-         if(melie[j][i] == 3) 
-         matrix->setPixelColor(matrix->SetXY(i-shift,j), BLUE);
-         if(melie[j][i] == 4) 
-         matrix->setPixelColor(matrix->SetXY(i-shift,j), WHITE);
-         if(melie[j][i] == 5) 
-         matrix->setPixelColor(matrix->SetXY(i-shift,j), PINK);
-      }
-    }
-  matrix->show();
-  delay(200);
-  matrix->ClearScreen();
- } 
- */
-  delete matrix;
-  matrix->show();
+ 
+    
+  
+    delete matrix;
+    matrix->show();
 
 }
 // end setup
 
-
+int test=0;
+int cnter;
 
 void loop(){
-  
   char inChar = (char)Serial1.read(); 
   if(inChar == 'X') {
     Snake* snake = new Snake(quitButton, height, width, leds, pin, NEO_GRB + NEO_KHZ800);
     while(snake->Game(200));
     delete snake;   
-   }
+  }
+   
+   
+  if(test==0){
+    Pixels* once = new Pixels(quitButton, height, width, leds, pin, NEO_GRB + NEO_KHZ800);
+    once->HW();   
+    delete once;
+    test=1;
+  }
+    
    Pixels* pixels = new Pixels(quitButton, height, width, leds, pin, NEO_GRB + NEO_KHZ800);
-   while(pixels->Rainbow(20, 10));
-   while(pixels->colorWipe(BLUE, 10));
+   pixels->glowDispandMultiColor();   
+   while(pixels->Rainbow(10, 10));
+   cnter = random(1,7);
+   switch(cnter){
+     case 1 : while(pixels->colorWipe(BLUE, 10));
+       break;
+     case 2 : while(pixels->colorWipe(RED, 10));
+       break;
+     case 3 : while(pixels->colorWipe(YELLOW, 10));
+       break;
+     case 4 : while(pixels->colorWipe(PINK, 10));
+       break;
+     case 5 : while(pixels->colorWipe(GREEN, 10));
+       break;
+     case 6 : while(pixels->colorWipe(ORANGE, 10));
+       break;
+     case 7 : while(pixels->colorWipe(WHITE, 10));
+       break;
+   }
    while(pixels->theaterChaseRainbow(20));
    delete pixels;
   

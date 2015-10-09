@@ -9,6 +9,11 @@
 #include "MyLedMatrix.h"
 #include "math.h"
 
+//  uint32_t color;
+//  uint8_t red, blue, green;
+//  red   = (color >> 16);
+//  blue  = (color >> 8);
+//  green = (color >> 0);
 
 
 #define BRIGHTNESS 64
@@ -18,6 +23,7 @@ Pixels::Pixels(char qb, uint8_t h, uint8_t w, uint8_t l, uint8_t p, uint8_t t) :
 {
   m_height = h;
   m_width = w;
+  m_numleds = l;
   char m_quitButton = qb;
 }
 
@@ -128,15 +134,126 @@ int Pixels::theaterChaseRainbow(uint8_t wait, uint8_t rerun) {
     }
   }
   cnt++;
+  
+
+}
+
+void Pixels::HW(){
+  for(int shift=-53; shift<53;shift++){ 
+      for(int i=0; i<53; i++) {
+        for(int j=0; j<10; j++)  {
+           if(helloWorld[j][i] == 1) 
+           MyLedMatrix::setPixelColor(MyLedMatrix::SetXY(i-shift,j), RED);
+           if(helloWorld[j][i] == 2) 
+           MyLedMatrix::setPixelColor(MyLedMatrix::SetXY(i-shift,j), GREEN);
+           if(helloWorld[j][i] == 3) 
+           MyLedMatrix::setPixelColor(MyLedMatrix::SetXY(i-shift,j), BLUE);
+           if(helloWorld[j][i] == 4) 
+           MyLedMatrix::setPixelColor(MyLedMatrix::SetXY(i-shift,j), WHITE);
+           if(helloWorld[j][i] == 5) 
+           MyLedMatrix::setPixelColor(MyLedMatrix::SetXY(i-shift,j), PINK);
+        }
+      }
+    MyLedMatrix::show();
+    delay(75);
+    MyLedMatrix::ClearScreen();
+   } 
+}
+
+void Pixels::M(){
+   for(int shift=-15; shift<12;shift++){ 
+    for(int i=0; i<15; i++) {
+      for(int j=0; j<10; j++)  {
+         if(melie[j][i] == 1) 
+         MyLedMatrix::setPixelColor(MyLedMatrix::SetXY(i-shift,j), RED);
+         if(melie[j][i] == 2) 
+         MyLedMatrix::setPixelColor(MyLedMatrix::SetXY(i-shift,j), GREEN);
+         if(melie[j][i] == 3) 
+         MyLedMatrix::setPixelColor(MyLedMatrix::SetXY(i-shift,j), BLUE);
+         if(melie[j][i] == 4) 
+         MyLedMatrix::setPixelColor(MyLedMatrix::SetXY(i-shift,j), WHITE);
+         if(melie[j][i] == 5) 
+         MyLedMatrix::setPixelColor(MyLedMatrix::SetXY(i-shift,j), PINK);
+      }
+    }
+  MyLedMatrix::show();
+  delay(200);
+  MyLedMatrix::ClearScreen();
+ }  
 }
 
 
+void Pixels::dots(uint8_t wait, uint32_t color)
+{
+   byte array[m_numleds]; 
+   byte counter=0; 
+   byte randomNumber; 
+   boolean inArray = false;
+   // Do as long as all led values are written in the array
+   while(counter < m_numleds) 
+   {    
+      randomNumber = random(0, m_numleds); 
+      for(byte i=0; i<m_numleds-1; i++) 
+      {
+         if(array[i] == randomNumber)
+         {
+             inArray = true;
+             break;
+         }
+         else
+             inArray = false;
+      }
+      
+      if(inArray == false)
+      {
+          array[counter] = randomNumber; 
+          counter++; 
+      }  
+   } 
+  // set all led numbers in the arry
+  for(byte i=0; i<120; i++) {
+    MyLedMatrix::setPixelColor(array[i], color);
+    MyLedMatrix::show();
+    delay(wait);
+  }    
+}
 
+void Pixels::disband(uint8_t wait)
+{
+   dots(wait, 0);
+}
 
+void Pixels::appear(uint8_t wait, uint32_t color)
+{
+  dots(wait, color);
+}
 
+void Pixels::glow(uint32_t color, uint8_t wait)
+{
+  for(uint8_t brightness=0; brightness<64; brightness++){
+    for(uint8_t led=0; led<m_numleds; led++){
+      MyLedMatrix::setPixelColor(led, color);
+      MyLedMatrix::setBrightness(brightness);
+    }
+  delay(10);
+  MyLedMatrix::show();
+  }
+  MyLedMatrix::setBrightness(64);
+ }
 
-
-
+void Pixels::glowDispandMultiColor(uint8_t wait)
+{
+  glow(PINK);
+  disband(wait);
+  glow(ORANGE);
+  disband(wait);
+  glow(BLUE);
+  disband(wait);
+  glow(YELLOW);
+  disband(wait);
+  glow(RED);
+  disband(wait);
+}
 
 
 
