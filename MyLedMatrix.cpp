@@ -62,6 +62,30 @@ uint16_t MyLedMatrix::SetXY(uint8_t x, uint8_t y)
     
     return i;    
 }
+
+void MyLedMatrix::SetXY(uint8_t x, uint8_t y, uint32_t c)
+{
+	uint16_t i;
+  if(x>m_width-1) x = m_maxleds+1;//m_width-1;
+  if(y>m_height-1) y = m_maxleds+1;//m_height-1;
+  if(x<0) x = 0;
+  if(y<0) y = 0;
+  
+    if( y & 0x01)
+    {
+      // Odd rows run backwards
+      uint8_t reverseX = (m_width - 1) - x;
+      i = (y * m_width) + reverseX;
+    } 
+    else 
+    {
+      // Even rows run forwards
+      i = (y * m_width) + x;
+    }
+    
+    setPixelColor(i, c); 
+}
+
 /* X and Y are the  */
 uint8_t MyLedMatrix::GetXY(uint16_t n, uint8_t *X, uint8_t *Y)
 {

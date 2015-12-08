@@ -31,12 +31,13 @@ public:
 	void ClearScreen();
 	
 	void SetText(char *text, uint8_t r, uint8_t g, uint8_t b);
-        void SetChar(char ch, uint8_t r, uint8_t g, uint8_t b, uint8_t offsetX, uint8_t OffsetY);
+    void SetChar(char ch, uint8_t r, uint8_t g, uint8_t b, uint8_t offsetX, uint8_t OffsetY);
 	void MoveRight(uint8_t steps);
 	void MoveLeft();
 	void MoveUp();
 	void MoveDown();
 	uint16_t SetXY(uint8_t x, uint8_t y);
+	void SetXY(uint8_t x, uint8_t y, uint32_t c);
 	uint8_t GetXY(uint16_t n, uint8_t *X, uint8_t *Y);
 
 	
